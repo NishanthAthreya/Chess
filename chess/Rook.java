@@ -6,10 +6,12 @@ package chess;
  */
 public class Rook extends Piece{
 
+	//private String color;
 	public Location location;
-	public Rook(Location location)
+	public Rook(Location location, String color)
 	{
 		this.location = location;
+		this.color = color;
 	}
 	public boolean canMove(Location newLoc)
 	{
@@ -23,6 +25,10 @@ public class Rook extends Piece{
 		}
 		return true;
 	}
+	public String getColor()
+	{
+		return color;
+	}
 	public void moveTo(Location newLoc)
 	{
 		if (this.canMove(newLoc))
@@ -32,6 +38,14 @@ public class Rook extends Piece{
 		else{
 			System.out.println("Illegal move, try again");
 		}
+	}
+	public String toString()
+	{
+		if (color == "black")
+		{
+			return "bR";
+		}
+		return "wR";
 	}
 }
 
