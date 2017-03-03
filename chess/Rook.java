@@ -6,7 +6,7 @@ package chess;
  */
 public class Rook extends Piece{
 
-	//private String color;
+	private String color;
 	public Location location;
 	public Rook(Location location, String color)
 	{
