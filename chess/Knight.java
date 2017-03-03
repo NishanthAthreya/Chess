@@ -5,13 +5,13 @@ public class Knight extends Piece{
 	}
 
 	@Override
-	boolean canMove(String newLoc) {
+	boolean canMove(Location newLoc) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	void moveTo(String newLoc) {
+	void moveTo(Location newLoc) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -2,7 +2,7 @@ package chess;
 
 public abstract class Piece {
 
-	abstract boolean canMove(String newLoc);
+	abstract boolean canMove(Location newLoc);
 	
-	abstract void moveTo(String newLoc);
+	abstract void moveTo(Location newLoc);
 }
