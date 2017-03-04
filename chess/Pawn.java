@@ -22,13 +22,13 @@ public class Pawn extends Piece{
 	}
 	
 	@Override
-	boolean canMove(Location newLoc) {
+	boolean canMove(Location newLoc, Board b) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	boolean moveTo(Location newLoc) {
+	boolean moveTo(Location newLoc, Board b) {
 		// TODO Auto-generated method stub
 		return false;
 	}
