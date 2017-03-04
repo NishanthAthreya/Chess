@@ -15,6 +15,7 @@ public class Rook extends Piece{
 	}
 	public boolean canMove(Location newLoc)
 	{
+		//have to check that no pieces of same color are in the way
 		int currFile = location.convertX();
 		int currRank = location.getY();
 		int newFile = newLoc.convertX();
