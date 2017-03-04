@@ -42,7 +42,7 @@ public class Rook extends Piece{
 	}
 	public String toString()
 	{
-		if (color == "black")
+		if (color.equals("black"))
 		{
 			return "bR";
 		}
