@@ -20,7 +20,7 @@ public class Rook extends Piece{
 		int currRank = location.getY();
 		int newFile = newLoc.convertX();
 		int newRank = newLoc.getY();
-		if ((currFile != newFile)||(currRank != newRank))		//rook can only move in a line, so rank or file must stay the same
+		if ((currFile != newFile)&&(currRank != newRank))		//rook can only move in a line, so rank or file must stay the same
 		{
 			return false;
 		}
@@ -30,15 +30,18 @@ public class Rook extends Piece{
 	{
 		return color;
 	}
-	public void moveTo(Location newLoc)
+	public boolean moveTo(Location newLoc)
 	{
 		if (this.canMove(newLoc))
 		{
+			//System.out.println("this is a rook");
 			location = newLoc;
+			return true;
 		}
-		else{
+		
 			System.out.println("Illegal move, try again");
-		}
+			return false;
+		
 	}
 	public String toString()
 	{

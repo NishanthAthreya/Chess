@@ -28,7 +28,8 @@ public class Pawn extends Piece{
 	}
 
 	@Override
-	void moveTo(Location newLoc) {
+	boolean moveTo(Location newLoc) {
 		// TODO Auto-generated method stub
+		return false;
 	}
 }
