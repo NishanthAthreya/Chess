@@ -1,7 +1,16 @@
 package chess;
 public class Knight extends Piece{
-	public Knight(){
-		
+	private String color;
+	public Location location;
+	public Knight(Location location, String color)
+	{
+		this.location = location;
+		this.color = color;
+	}
+	
+	public String getColor()
+	{
+		return color;
 	}
 
 	@Override
@@ -14,5 +23,14 @@ public class Knight extends Piece{
 	void moveTo(Location newLoc) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String toString()
+	{
+		if (color.equals("black"))
+		{
+			return "bK";
+		}
+		return "wK";
 	}
 }

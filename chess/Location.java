@@ -1,14 +1,14 @@
 package chess;
 
 public class Location {
-	private String x;
+	private char x;
 	private int y;
-	public Location(String x, int y)
+	public Location(char x, int y)
 	{
 		this.x = x;
 		this.y = y;
 	}
-	public String getX()
+	public char getX()
 	{
 		return x;
 	}
@@ -20,22 +20,22 @@ public class Location {
 	{
 		switch (x)
 		{
-			case "a":
+			case 'a':
+				return 0;
+			case 'b':
 				return 1;
-			case "b":
+			case 'c':
 				return 2;
-			case "c":
+			case 'd':
 				return 3;
-			case "d":
+			case 'e':
 				return 4;
-			case "e":
+			case 'f':
 				return 5;
-			case "f":
+			case 'g':
 				return 6;
-			case "g":
+			case 'h':
 				return 7;
-			case "h":
-				return 8;
 		}
 		return 0;
 	}
