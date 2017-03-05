@@ -11,6 +11,8 @@ public class Board {
 		board[7][7] = new Rook(new Location('h', 7), "black");
 		board[7][1] = new Knight(new Location('b',7), "black");
 		board[7][6] = new Knight(new Location('g',7), "black");
+		board[7][2] = new Bishop(new Location('c',7), "black");
+		board[7][5] = new Bishop(new Location('f',7), "black");
 		for(int c = 0;c < board[6].length;c++){
 			board[6][c] = new Pawn(new Location((char)('a'+ c), 6), "black");
 		}
@@ -21,6 +23,8 @@ public class Board {
 		board[0][7] = new Rook(new Location('h', 0), "white");
 		board[0][1] = new Knight(new Location('b', 0), "white");
 		board[0][6] = new Knight(new Location('g', 0), "white");
+		board[0][2] = new Bishop(new Location('c',0),"white");
+		board[0][5] = new Bishop(new Location('f',0),"white");
 	}
 	public void draw(){
 		for(int r = board.length - 1;r >= 0;r--){
