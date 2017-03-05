@@ -18,9 +18,14 @@ public class Knight extends Piece{
 		// TODO Auto-generated method stub
 		int diffX = Math.abs(this.location.convertX() - newLoc.convertX());
 		int diffY = Math.abs(this.location.getY() - newLoc.getY());
-		if(diffX != 1 || diffY != 2)
-			return false;
-		return true;
+		if(diffX == 1){
+			if(diffY == 2)
+				return true;
+		}else if(diffX == 2){
+			if(diffY == 1)
+				return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -39,8 +44,8 @@ public class Knight extends Piece{
 	{
 		if (color.equals("black"))
 		{
-			return "bK";
+			return "bN";
 		}
-		return "wK";
+		return "wN";
 	}
 }
