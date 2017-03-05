@@ -14,15 +14,25 @@ public class Knight extends Piece{
 	}
 
 	@Override
-	boolean canMove(Location newLoc) {
+	boolean canMove(Location newLoc, Board b) {
 		// TODO Auto-generated method stub
-		return false;
+		int diffX = Math.abs(this.location.convertX() - newLoc.convertX());
+		int diffY = Math.abs(this.location.getY() - newLoc.getY());
+		if(diffX != 1 || diffY != 2)
+			return false;
+		return true;
 	}
 
 	@Override
-	void moveTo(Location newLoc) {
+	boolean moveTo(Location newLoc, Board b) {
 		// TODO Auto-generated method stub
-		
+		if(canMove(newLoc, b)){
+			this.location = newLoc;
+			return true;
+		}
+		System.out.println("Illegal move, try again");
+		System.out.println();
+		return false;
 	}
 	
 	public String toString()

@@ -23,13 +23,32 @@ public class Pawn extends Piece{
 	
 	@Override
 	boolean canMove(Location newLoc, Board b) {
-		// TODO Auto-generated method stub
-		return false;
+		if(this.location.convertX() != newLoc.convertX())
+			return false;
+		int diff = Math.abs(this.location.getY() - newLoc.getY());
+		if(diff > 2){
+			return false;
+		}
+		if(this.color.equals("black")){
+			if(this.location.getY() != 6 && diff > 1)
+				return false;
+		}
+		else if(this.color.equals("white")){
+			if(this.location.getY() != 1 && diff > 1)
+				return false;
+		}
+		return true;
 	}
 
 	@Override
 	boolean moveTo(Location newLoc, Board b) {
-		// TODO Auto-generated method stub
+		if(canMove(newLoc, b))
+		{
+			this.location = newLoc;
+			return true;
+		}
+		System.out.println("Illegal move, try again");
+		System.out.println();
 		return false;
 	}
 }
