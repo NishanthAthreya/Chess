@@ -6,20 +6,24 @@ public class Player {
 		this.color = color;
 	}
 	public boolean move(Board b, Location init, Location to){
+		boolean canMove = false;
 		Piece curr = b.board[init.getY()][init.convertX()];
 		if (b.board[to.getY()][to.convertX()]!=null)	//pi
 		{
 			Piece p = b.board[to.getY()][to.convertX()];
-			if (!(p.getColor().equals(color)))
+			canMove = curr.moveTo(to,b);
+			if (!(p.getColor().equals(color)) && canMove)
 			{
 				b.board[to.getY()][to.convertX()]=curr;
 				b.board[init.getY()][init.convertX()]=null;
-			//curr.moveTo(to);
-			return true;	
-			}
+				//curr.moveTo(to);
+				return true;
+				}	
 			else{
-				System.out.println("Illegal move, try again");
-				System.out.println();
+				if(canMove){
+					System.out.println("Illegal move, try again");
+					System.out.println();
+				}
 				return false;
 			}
 		}
@@ -28,7 +32,7 @@ public class Player {
 			b.board[to.getY()][to.convertX()]=curr;
 			b.board[init.getY()][init.convertX()]=null;
 		//curr.moveTo(to);
-		return true;
+			return true;
 		}
 		return false;
 	}

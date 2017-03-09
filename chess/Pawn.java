@@ -23,7 +23,18 @@ public class Pawn extends Piece{
 	
 	@Override
 	boolean canMove(Location newLoc, Board b) {
+		//killing
+		if(Math.abs(this.location.convertX() - newLoc.convertX()) == 1 &&
+				Math.abs(this.location.getY() - newLoc.getY()) == 1){
+			if(b.board[newLoc.getY()][newLoc.convertX()] != null)
+				return true;
+			else
+				return false;
+		}
+		//moving
 		if(this.location.convertX() != newLoc.convertX())
+			return false;
+		if(b.board[newLoc.getY()][newLoc.convertX()] != null)//cannot kill while moving
 			return false;
 		int diff = Math.abs(this.location.getY() - newLoc.getY());
 		if(diff > 2){
