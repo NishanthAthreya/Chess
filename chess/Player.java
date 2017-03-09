@@ -18,6 +18,8 @@ public class Player {
 			return true;	
 			}
 			else{
+				System.out.println("Illegal move, try again");
+				System.out.println();
 				return false;
 			}
 		}
