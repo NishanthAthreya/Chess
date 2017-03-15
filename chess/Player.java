@@ -19,6 +19,8 @@ public class Player {
 			if (!(p.getColor().equals(color)) && canMove)
 			{
 				b.board[to.getY()][to.convertX()]=curr;
+				Location newLoc = new Location(to.getX(),to.getY());		//changing location of piece
+				curr.setLocation(newLoc);
 				b.board[init.getY()][init.convertX()]=null;
 				//curr.moveTo(to);
 				if(to.getY() == 7){
@@ -58,6 +60,8 @@ public class Player {
 		if (curr.moveTo(to,b))
 		{
 			b.board[to.getY()][to.convertX()]=curr;
+			Location newLoc = new Location(to.getX(),to.getY());		//changing location of piece
+			curr.setLocation(newLoc);
 			b.board[init.getY()][init.convertX()]=null;
 		//curr.moveTo(to);
 			if(to.getY() == 7){
