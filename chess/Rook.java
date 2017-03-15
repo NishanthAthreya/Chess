@@ -96,19 +96,21 @@ public class Rook extends Piece{
 		{
 			//System.out.println("this is a rook");
 			location = newLoc;
-			Location opposKingsLoc = this.getKingLocation(this.color, b);
+		/*	Location opposKingsLoc = this.getKingLocation(this.color, b);
 			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
 			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());
 			//System.out.println("called getKingLoc");
 			if (canMove(opposKingsLoc,b))
 			{
-				//System.out.println("entered");
-				this.check = true;
-				b.check = true;
+				System.out.println("entered checking");
+				//this.check = true;
+				//b.board[this.getLocation().getY()][this.getLocation().convertX()].check = true;
+				//b.check = true;
 				System.out.println();
 				System.out.println("Check");
 				System.out.println();
-			}
+			}*/
+			//System.out.println(this.check);
 			return true;
 		}
 		

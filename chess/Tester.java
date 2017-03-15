@@ -7,6 +7,8 @@ public class Tester {
 	public static void main(String[] args) {
 		Board b = new Board();
 		b.draw();
+		//System.out.println();
+		//b.draw2();
 		int turn = 1;
 		int i = 0;
 		Player one = new Player("white");
@@ -41,6 +43,8 @@ public class Tester {
 				}
 				flag = one.move(b,current,movingto, c);
 				b.draw();
+				//System.out.println();
+				//b.draw2();
 			}
 			turn++;
 		}
@@ -68,6 +72,8 @@ public class Tester {
 				}
 				flag = two.move(b, current, movingto, c);
 				b.draw();
+				//System.out.println();
+			//	b.draw2();
 			}
 			turn++;
 		}

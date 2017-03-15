@@ -13,15 +13,21 @@ public class Bishop extends Piece{
 	public boolean canMove(Location newLoc, Board b)
 	{
 		//System.out.println(b.check);
-		Piece checkPiece = this.getCheckPiece(b);
-		if (checkPiece!=null)
+		//Piece checkPiece = this.getCheckPiece(b);
+		//System.out.println(checkPiece);
+		/*if (b.check==true)
+		{
+			return false;
+		}*/
+		/*if (checkPiece!=null)
 		{
 			Location checkLoc = checkPiece.getLocation();
 			if (b.check == true &&!(this.canMove(checkLoc, b)) )
 			{
+				//System.out.println("can't move");
 				return false;
 			}
-		}
+		}*/
 		int currFile = location.convertX();
 		int currRank = location.getY();
 		int newFile = newLoc.convertX();
@@ -86,6 +92,21 @@ public class Bishop extends Piece{
 	}
 	public boolean moveTo(Location newLoc, Board b)
 	{
+		Piece checkPiece = this.getCheckPiece(b);
+		//System.out.println(checkPiece);
+		/*if (b.check==true)
+		{
+			return false;
+		}*/
+		if (checkPiece!=null)
+		{
+			Location checkLoc = checkPiece.getLocation();
+			if (b.check == true &&!(this.canMove(checkLoc, b)) )
+			{
+				//System.out.println("can't move");
+				return false;
+			}
+		}
 		if (this.canMove(newLoc, b))
 		{
 			//System.out.println("entered into canmove");

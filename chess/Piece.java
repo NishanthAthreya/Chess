@@ -16,10 +16,13 @@ public abstract class Piece {
 		{
 			for (int j = 0; j<pieces[0].length;j++)
 			{
+				
 				if (pieces[i][j]!=null)
 				{
+					
 					if (pieces[i][j].check==true)
 					{
+						System.out.println(pieces[i][j].check);
 						check = pieces[i][j];
 						break;
 					}
