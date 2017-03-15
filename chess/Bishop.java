@@ -30,7 +30,6 @@ public class Bishop extends Piece{
 		int rankdiff = Math.abs(newRank-currRank);
 		if (filediff!=rankdiff)
 		{
-			System.out.println("entered");
 			return false;
 		}
 		/*if (b.board[newRank][newFile]!=null &&!(b.board[newRank][newFile].getColor().equals(this.color)))

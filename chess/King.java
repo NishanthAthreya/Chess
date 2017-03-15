@@ -7,7 +7,6 @@ public class King extends Piece{
 	public King(Location location, String color)
 	{
 		this.location = location;
-		System.out.println("location set");
 		this.color = color;
 	}
 	public boolean canMove(Location newLoc, Board b)
