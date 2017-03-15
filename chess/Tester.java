@@ -14,23 +14,32 @@ public class Tester {
 		Scanner scan = new Scanner(System.in);
 		while (i<1000)	//until game ends
 		{
+		char c = ' ';
 		if (turn%2!=0)
 		{
 			boolean flag = false;
 			while (!flag)	//keeps executing until valid move is applied
 			{
 				System.out.println();
-				System.out.println("White's move: ");
-				String s = scan.nextLine();
+				System.out.print("White's move: ");
+				String s = "";
+				while(s.length() < 5){
+					s = scan.nextLine();
+					if(s.length() < 5){
+						System.out.println();
+						System.out.println("Illegal move, try again");
+						System.out.print("White's move: ");
+					}
+				}
 				Location current = new Location(s.charAt(0),Integer.parseInt(s.charAt(1)+"")-1);
 				Location movingto = new Location(s.charAt(3),Integer.parseInt(s.charAt(4)+"")-1);
-				//try{
-				flag = one.move(b,current,movingto);
-				/*}catch (NullPointerException e)
-				{
-					System.out.println("Illegal move null, try again");
-					System.out.println();
-				}*/
+				//char c = ' ';
+				if(s.length() > 6){
+					if(movingto.getY() == 7){
+						c = s.charAt(6);
+					}
+				}
+				flag = one.move(b,current,movingto, c);
 				b.draw();
 			}
 			turn++;
@@ -40,11 +49,24 @@ public class Tester {
 			while (!flag)
 			{
 				System.out.println();
-				System.out.println("Black's move: ");
-				String s = scan.nextLine();
+				System.out.print("Black's move: ");
+				String s = "";
+				while(s.length() < 5){
+					s = scan.nextLine();
+					if(s.length() < 5){
+						System.out.println();
+						System.out.println("Invalid input");
+						System.out.print("Black's move: ");
+					}
+				}
 				Location current = new Location(s.charAt(0),Integer.parseInt(s.charAt(1)+"")-1);
 				Location movingto = new Location(s.charAt(3),Integer.parseInt(s.charAt(4)+"")-1);
-				flag = two.move(b, current, movingto);
+				if(s.length() > 6){
+					if(movingto.getY() == 7){
+						c = s.charAt(6);
+					}
+				}
+				flag = two.move(b, current, movingto, c);
 				b.draw();
 			}
 			turn++;

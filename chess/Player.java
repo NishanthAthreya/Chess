@@ -1,17 +1,18 @@
 package chess;
 
-import java.util.Scanner;
-
 public class Player {
 	private String color;
 	public Player(String color){
 		this.color = color;
 	}
-	public boolean move(Board b, Location init, Location to){
+	public boolean move(Board b, Location init, Location to, char x){
+		if(b.board[init.getY()][init.convertX()] == null){
+			System.out.println("Invalid move, try again");
+			System.out.println();
+			return false;
+		}
 		boolean canMove = false;
 		Piece curr = b.board[init.getY()][init.convertX()];
-		@SuppressWarnings("resource")
-		Scanner keyboard = new Scanner(System.in);
 		if (b.board[to.getY()][to.convertX()]!=null)	//pi
 		{
 			Piece p = b.board[to.getY()][to.convertX()];
@@ -23,21 +24,21 @@ public class Player {
 				curr.setLocation(newLoc);
 				b.board[init.getY()][init.convertX()]=null;
 				//curr.moveTo(to);
-				if(to.getY() == 7){
-					System.out.println("Please enter what piece you want your pawn to"
+				if(to.getY() == 7 || to.getY() == 0){
+					/*System.out.println("Please enter what piece you want your pawn to"
 							+ "transform into");
 					String x = keyboard.nextLine().toUpperCase();
-					String color;
+					String color;*/
 					switch(x){
-					case "BISHOP":
+					case 'B':
 						color = b.board[to.getY()][to.convertX()].getColor();
 						b.board[to.getY()][to.convertX()] = new Bishop(to, color);
 						break;
-					case "KNIGHT":
+					case 'N':
 						color = b.board[to.getY()][to.convertX()].getColor();
 						b.board[to.getY()][to.convertX()] = new Knight(to, color);
 						break;
-					case "ROOK":
+					case 'R':
 						color = b.board[to.getY()][to.convertX()].getColor();
 						b.board[to.getY()][to.convertX()] = new Rook(to, color);
 						break;
@@ -64,21 +65,21 @@ public class Player {
 			curr.setLocation(newLoc);
 			b.board[init.getY()][init.convertX()]=null;
 		//curr.moveTo(to);
-			if(to.getY() == 7){
-				System.out.println("Please enter what piece you want your pawn to"
+			if(to.getY() == 7 || to.getY() == 0){
+				/*System.out.println("Please enter what piece you want your pawn to"
 						+ "transform into");
 				String x = keyboard.nextLine().toUpperCase();
-				String color;
+				String color;*/
 				switch(x){
-				case "BISHOP":
+				case 'B':
 					color = b.board[to.getY()][to.convertX()].getColor();
 					b.board[to.getY()][to.convertX()] = new Bishop(to, color);
 					break;
-				case "KNIGHT":
+				case 'N':
 					color = b.board[to.getY()][to.convertX()].getColor();
 					b.board[to.getY()][to.convertX()] = new Knight(to, color);
 					break;
-				case "ROOK":
+				case 'R':
 					color = b.board[to.getY()][to.convertX()].getColor();
 					b.board[to.getY()][to.convertX()] = new Rook(to, color);
 					break;

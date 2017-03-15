@@ -25,27 +25,80 @@ public class Queen extends Piece{
 		int newRank = newLoc.getY();
 		int filediff = Math.abs(newFile-currFile);
 		int rankdiff = Math.abs(newRank-currRank);
-		if (filediff == rankdiff){
-			System.out.println(1);
-			if(b.board[newRank][newFile] == null)
-				return true;
-			else if(!b.board[newRank][newFile].getColor().equals(this.color))
-				return true;
-		}
-		else if(filediff > 0 && rankdiff == 0){
-			System.out.println(2);
-			if(b.board[newRank][newFile] == null)
-				return true;
-			else if(!b.board[newRank][newFile].getColor().equals(this.color))
-				return true;
-		}
-		else if(rankdiff > 0 && filediff == 0){
-			System.out.println(3);
-			if(b.board[newRank][newFile] == null)
-				return true;
-			else if(!b.board[newRank][newFile].getColor().equals(this.color))
-				return true;
-		}
+		//diagonal movement
+				if (filediff == rankdiff){
+					//checking if there is a piece in the way
+					if(currFile < newFile && currRank < newRank){
+						for(int i = currFile + 1, j = currRank + 1;i < newFile;i++,j++){
+							if(b.board[j][i] != null)
+								return false;
+						}
+					}
+					else if(currFile < newFile && currRank > newRank){
+						for(int i = currFile + 1, j = currRank - 1;i < newFile;i++,j--){
+							if(b.board[j][i] != null)
+								return false;
+						}
+					}
+					else if(currFile > newFile && currRank < newRank){
+						for(int i = currFile - 1, j = currRank + 1;i > newFile;i--,j++){
+							if(b.board[j][i] != null)
+								return false;
+						}
+					}
+					else if(currFile > newFile && currRank > newRank){
+						for(int i = currFile - 1, j = currRank - 1;i > newFile;i--,j--){
+							if(b.board[j][i] != null)
+								return false;
+						}
+					}
+					if(b.board[newRank][newFile] == null)
+						return true;
+					else if(!b.board[newRank][newFile].getColor().equals(this.color))
+						return true;
+				}
+				//horizontal movement
+				else if(filediff > 0 && rankdiff == 0){
+					//checking if there is a piece in the way
+					if(currFile < newFile){
+						for(int i = currFile + 1;i < newFile;i++){
+							if(b.board[currRank][i] != null)
+								return false;
+						}
+					}
+					else if(currFile > newFile){
+						for(int i = currFile - 1;i > newFile;i--){
+							if(b.board[currRank][i] != null)
+								return false;
+						}
+					}
+					if(b.board[newRank][newFile] == null)
+						return true;
+					else if(!b.board[newRank][newFile].getColor().equals(this.color))
+						return true;
+				}
+				//vertical movement
+				else if(rankdiff > 0 && filediff == 0){
+					//checking if there is a piece in the way
+					if(currRank < newRank){
+						for(int i = currRank+1;i < newRank;i++){
+							if(b.board[i][currFile] != null){
+								return false;
+							}
+						}
+					}
+					else if(currRank > newRank){
+						for(int i = currRank - 1;i > newRank;i--){
+							if(b.board[i][currFile] != null){
+								return false;
+							}
+						}
+					}
+					if(b.board[newRank][newFile] == null)
+						return true;
+					else if(!b.board[newRank][newFile].getColor().equals(this.color))
+						return true;
+				}
 		return false;
 	}
 
