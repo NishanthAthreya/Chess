@@ -7,7 +7,8 @@ package chess;
 public class Rook extends Piece{
 
 	private String color;
-	public Location location;
+	private Location location;
+	boolean check = false;
 	public Rook(Location location, String color)
 	{
 		this.location = location;
@@ -16,6 +17,15 @@ public class Rook extends Piece{
 	public boolean canMove(Location newLoc, Board b)
 	{
 		//have to check that no pieces of same color are in the way
+		Piece checkPiece = this.getCheckPiece(b);
+		if (checkPiece!=null)
+		{
+			Location checkLoc = checkPiece.getLocation();
+			if (b.check == true &&!(this.canMove(checkLoc, b)) )
+			{
+				return false;
+			}
+		}
 		int currFile = location.convertX();
 		int currRank = location.getY();
 		int newFile = newLoc.convertX();
@@ -28,7 +38,7 @@ public class Rook extends Piece{
 		{
 			if (currFile<newFile) //going right
 			{
-				for (int c = currFile; c<= newFile;c++)
+				for (int c = currFile+1; c< newFile;c++)
 				{
 					if (b.board[currRank][c]!=null)//piece there
 					{
@@ -39,7 +49,7 @@ public class Rook extends Piece{
 			}
 			else if (currFile>newFile) //going left
 			{
-				for (int c = currFile; c>= newFile;c--)
+				for (int c = currFile-1; c> newFile;c--)
 				{
 					if (b.board[currRank][c]!=null)//piece there
 					{
@@ -53,7 +63,7 @@ public class Rook extends Piece{
 		{
 			if (currRank<newRank) //going up
 			{
-				for (int c = currRank; c<= newRank;c++)
+				for (int c = currRank+1; c< newRank;c++)
 				{
 					if (b.board[c][currFile]!=null)//piece there
 					{
@@ -64,7 +74,7 @@ public class Rook extends Piece{
 			}
 			else if (currRank>newRank) //going down
 			{
-				for (int c = currFile; c>= newFile;c--)
+				for (int c = currFile-1; c>newFile;c--)
 				{
 					if (b.board[c][currFile]!=null)//piece there
 					{
@@ -86,6 +96,19 @@ public class Rook extends Piece{
 		{
 			//System.out.println("this is a rook");
 			location = newLoc;
+			Location opposKingsLoc = this.getKingLocation(this.color, b);
+			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
+			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());
+			//System.out.println("called getKingLoc");
+			if (canMove(opposKingsLoc,b))
+			{
+				//System.out.println("entered");
+				this.check = true;
+				b.check = true;
+				System.out.println();
+				System.out.println("Check");
+				System.out.println();
+			}
 			return true;
 		}
 		
@@ -101,6 +124,14 @@ public class Rook extends Piece{
 			return "bR";
 		}
 		return "wR";
+	}
+	public Location getLocation()
+	{
+		return location;
+	}
+	public void setLocation(Location newLoc)
+	{
+		location = newLoc;
 	}
 }
 

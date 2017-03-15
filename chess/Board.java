@@ -2,6 +2,8 @@ package chess;
 
 public class Board {
 	Piece[][] board; 
+	Location BlackKingsLocation;
+	boolean check= false;
 	public Board(){
 		board = new Piece[8][8];
 		init();
@@ -14,6 +16,7 @@ public class Board {
 		board[7][2] = new Bishop(new Location('c',7), "black");
 		board[7][5] = new Bishop(new Location('f',7), "black");
 		board[7][3] = new Queen(new Location('d',7), "black");
+		board[7][4] = new King(new Location('e',7),"black");
 		for(int c = 0;c < board[6].length;c++){
 			board[6][c] = new Pawn(new Location((char)('a'+ c), 6), "black");
 		}
@@ -27,6 +30,7 @@ public class Board {
 		board[0][2] = new Bishop(new Location('c',0),"white");
 		board[0][5] = new Bishop(new Location('f',0),"white");
 		board[0][3] = new Queen(new Location('d', 0), "white");
+		board[0][4] = new King(new Location('e', 0),"white");
 	}
 	public void draw(){
 		for(int r = board.length - 1;r >= 0;r--){

@@ -2,13 +2,23 @@ package chess;
 
 public class Queen extends Piece{
 	private String color;
-	public Location location;
+	private Location location;
+	boolean check = false;
 	public Queen(Location location, String color){
 		this.location = location;
 		this.color = color;
 	}
 	@Override
 	boolean canMove(Location newLoc, Board b) {
+		Piece checkPiece = this.getCheckPiece(b);
+		if (checkPiece!=null)
+		{
+			Location checkLoc = checkPiece.getLocation();
+			if (b.check == true &&!(this.canMove(checkLoc, b)) )
+			{
+				return false;
+			}
+		}
 		int currFile = location.convertX();
 		int currRank = location.getY();
 		int newFile = newLoc.convertX();
@@ -44,6 +54,16 @@ public class Queen extends Piece{
 		if (this.canMove(newLoc, b))
 		{
 			this.location = newLoc;
+			Location opposKingsLoc = this.getKingLocation(this.color, b);
+			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
+			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());
+			//System.out.println("called getKingLoc");
+			if (canMove(opposKingsLoc,b))
+			{
+				//System.out.println("entered");
+				b.check = true;
+				System.out.println("Check");
+			}
 			return true;
 		}
 		System.out.println("Illegal move, try again");
@@ -62,5 +82,13 @@ public class Queen extends Piece{
 			return "wQ";
 		}
 		return "bQ";
+	}
+	public Location getLocation()
+	{
+		return location;
+	}
+	public void setLocation(Location newLoc)
+	{
+		location = newLoc;
 	}
 }

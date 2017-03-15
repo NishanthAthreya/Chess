@@ -24,7 +24,13 @@ public class Tester {
 				String s = scan.nextLine();
 				Location current = new Location(s.charAt(0),Integer.parseInt(s.charAt(1)+"")-1);
 				Location movingto = new Location(s.charAt(3),Integer.parseInt(s.charAt(4)+"")-1);
+				//try{
 				flag = one.move(b,current,movingto);
+				/*}catch (NullPointerException e)
+				{
+					System.out.println("Illegal move null, try again");
+					System.out.println();
+				}*/
 				b.draw();
 			}
 			turn++;

@@ -3,7 +3,8 @@ package chess;
 public class Bishop extends Piece{
 
 	private String color;
-	public Location location;
+	private Location location;
+	boolean check = false;
 	public Bishop(Location location, String color)
 	{
 		this.location = location;
@@ -11,6 +12,16 @@ public class Bishop extends Piece{
 	}
 	public boolean canMove(Location newLoc, Board b)
 	{
+		//System.out.println(b.check);
+		Piece checkPiece = this.getCheckPiece(b);
+		if (checkPiece!=null)
+		{
+			Location checkLoc = checkPiece.getLocation();
+			if (b.check == true &&!(this.canMove(checkLoc, b)) )
+			{
+				return false;
+			}
+		}
 		int currFile = location.convertX();
 		int currRank = location.getY();
 		int newFile = newLoc.convertX();
@@ -19,14 +30,20 @@ public class Bishop extends Piece{
 		int rankdiff = Math.abs(newRank-currRank);
 		if (filediff!=rankdiff)
 		{
+			System.out.println("entered");
 			return false;
 		}
+		/*if (b.board[newRank][newFile]!=null &&!(b.board[newRank][newFile].getColor().equals(this.color)))
+		{
+			return true;
+		}*/
 		if (newFile > currFile && newRank > currRank)	//topright
 		{
-			for (int i = currRank+1, j = currFile+1; i<=newRank; i++, j++)
+			for (int i = currRank+1, j = currFile+1; i<newRank; i++, j++)
 			{
 				if (b.board[i][j]!=null)
 				{
+					//System.out.println("entered");
 					//System.out.println("topright");
 					return false;
 				}
@@ -34,7 +51,7 @@ public class Bishop extends Piece{
 		}
 		if (newFile > currFile && newRank < currRank)	//bottomright
 		{
-			for (int i = currRank-1, j = currFile+1; j<=newFile; i--, j++)
+			for (int i = currRank-1, j = currFile+1; j<newFile; i--, j++)
 			{
 				if (b.board[i][j]!=null)
 				{
@@ -45,10 +62,11 @@ public class Bishop extends Piece{
 		}
 		if (newFile < currFile && newRank > currRank)	//topleft
 		{
-			for (int i = currRank+1, j = currFile-1; i<=newRank; i++, j--)
+			for (int i = currRank+1, j = currFile-1; i<newRank; i++, j--)
 			{
 				if (b.board[i][j]!=null)
 				{
+					//System.out.println("entered");
 					//System.out.println("topleft" +  " " + b.board[i][j]);
 					return false;
 				}
@@ -56,7 +74,7 @@ public class Bishop extends Piece{
 		}
 		if (newFile < currFile && newRank < currRank)	//bottomleft
 		{
-			for (int i = currRank-1, j = currFile-1; i>=newRank; i--, j--)
+			for (int i = currRank-1, j = currFile-1; i>newRank; i--, j--)
 			{
 				if (b.board[i][j]!=null)
 				{
@@ -71,10 +89,22 @@ public class Bishop extends Piece{
 	{
 		if (this.canMove(newLoc, b))
 		{
+			//System.out.println("entered into canmove");
 			location = newLoc;
+			Location opposKingsLoc = this.getKingLocation(this.color, b);
+			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
+			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());
+			//System.out.println("called getKingLoc");
+			if (canMove(opposKingsLoc,b))
+			{
+				//System.out.println("entered");
+				b.check = true;
+				System.out.println("Check");
+			}
+			//System.out.println("ready to return true");
 			return true;
 		}
-		System.out.println("Illegal move, try again");
+		System.out.println("Illegal movie, try again");
 		System.out.println();
 		return false;
 	}
@@ -89,5 +119,13 @@ public class Bishop extends Piece{
 			return "wB";
 		}
 		return "bB";
+	}
+	public Location getLocation()
+	{
+		return location;
+	}
+	public void setLocation(Location newLoc)
+	{
+		location = newLoc;
 	}
 }
