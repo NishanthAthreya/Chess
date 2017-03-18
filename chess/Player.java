@@ -7,7 +7,7 @@ public class Player {
 	}
 	public boolean move(Board b, Location init, Location to, char x){
 		if(b.board[init.getY()][init.convertX()] == null){
-			System.out.println("Invalid move, try again");
+			System.out.println("Illegal move, try again");
 			System.out.println();
 			return false;
 		}
@@ -39,7 +39,7 @@ public class Player {
 					b.check = false;
 				}
 				//curr.moveTo(to);
-				if(to.getY() == 7 || to.getY() == 0){
+				if((to.getY() == 7 || to.getY() == 0) && curr instanceof Pawn){
 					/*System.out.println("Please enter what piece you want your pawn to"
 							+ "transform into");
 					String x = keyboard.nextLine().toUpperCase();
@@ -75,6 +75,30 @@ public class Player {
 		}
 		if (curr.moveTo(to,b))
 		{
+			if (curr.isCastling == true)
+			{
+				//System.out.println("is castling");
+				if (to.getX()=='g' && to.getY() == 0)
+				{
+				b.board[0][5] = new Rook(new Location('f',0),"white");	//changing rook's position
+				b.board[0][7] = null;
+				}
+				if (to.getX()=='b' && to.getY() == 0)
+				{
+					b.board[0][2] = new Rook(new Location('c',0),"white");
+					b.board[0][0] = null;
+				}
+				if (to.getX()=='g' && to.getY() == 7)
+				{
+					b.board[7][5] = new Rook(new Location('f',7),"black");
+					b.board[7][7] = null;
+				}
+				if (to.getX()=='b' && to.getY() == 7)
+				{
+					b.board[7][2] = new Rook(new Location('c',7),"black");
+					b.board[7][0] = null;
+				}
+			}
 			b.board[to.getY()][to.convertX()]=curr;
 			Location newLoc = new Location(to.getX(),to.getY());		//changing location of piece
 			curr.setLocation(newLoc);
@@ -94,11 +118,13 @@ public class Player {
 				b.check = false;
 			}
 		//curr.moveTo(to);
-			if(to.getY() == 7 || to.getY() == 0){
+			//System.out.println(curr.toString());
+			if((to.getY() == 7 || to.getY() == 0) && curr instanceof Pawn){
 				/*System.out.println("Please enter what piece you want your pawn to"
 						+ "transform into");
 				String x = keyboard.nextLine().toUpperCase();
 				String color;*/
+				System.out.println("entered instanceof");
 				switch(x){
 				case 'B':
 					color = b.board[to.getY()][to.convertX()].getColor();
@@ -120,9 +146,9 @@ public class Player {
 			}
 			return true;
 		}
-		System.out.println();
-		System.out.println("Invalid move, try again");
-		System.out.println();
+		//System.out.println();
+		//System.out.println("Invalid move, try again");
+		//System.out.println();
 		return false;
 	}
 	public boolean isCheckMate(Board b)
@@ -165,7 +191,7 @@ public class Player {
 					{
 						for (int y = 0; y<b.board[0].length;y++)
 						{
-							if(!(b.board[x][y].canMove(loc, b)))
+							if(!(b.board[x][y].canMove(loc, b)))	//have to check that it's opposite color!!
 							{
 								return false;			//not a checkmate, king can move there
 							}

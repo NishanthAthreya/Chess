@@ -4,6 +4,7 @@ public abstract class Piece {
 	protected String color;
 	protected boolean check;
 	protected Location location;
+	boolean isCastling = false;
 	abstract boolean canMove(Location newLoc, Board b);
 	
 	abstract boolean moveTo(Location newLoc, Board b);

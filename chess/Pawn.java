@@ -34,6 +34,14 @@ public class Pawn extends Piece{
 				return false;
 			}
 		}
+		if (color == "white" && newLoc.getY()<location.getY())
+		{
+			return false;
+		}
+		if (color == "black" && newLoc.getY()>location.getY())
+		{
+			return false;
+		}
 		if(Math.abs(this.location.convertX() - newLoc.convertX()) == 1 &&
 				Math.abs(this.location.getY() - newLoc.getY()) == 1){
 			if(b.board[newLoc.getY()][newLoc.convertX()] != null)

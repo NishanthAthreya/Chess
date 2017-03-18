@@ -9,6 +9,7 @@ public class Rook extends Piece{
 	private String color;
 	private Location location;
 	boolean check = false;
+	//boolean hasMoved = false;
 	public Rook(Location location, String color)
 	{
 		this.location = location;
@@ -95,6 +96,7 @@ public class Rook extends Piece{
 		if (this.canMove(newLoc, b))
 		{
 			//System.out.println("this is a rook");
+			//hasMoved = true;
 			location = newLoc;
 		/*	Location opposKingsLoc = this.getKingLocation(this.color, b);
 			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
