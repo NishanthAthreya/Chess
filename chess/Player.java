@@ -23,6 +23,10 @@ public class Player {
 				Location newLoc = new Location(to.getX(),to.getY());		//changing location of piece
 				curr.setLocation(newLoc);
 				b.board[init.getY()][init.convertX()]=null;
+				if(b.board[to.getY()][to.convertX()] instanceof Pawn){
+					Pawn pawn = (Pawn)b.board[to.getY()][to.convertX()];
+					pawn.numMoves = pawn.numMoves + 1;
+				}
 				//
 				Location opposKingsLoc = curr.getKingLocation(this.color, b);
 				if (curr.canMove(opposKingsLoc, b))
@@ -124,7 +128,7 @@ public class Player {
 						+ "transform into");
 				String x = keyboard.nextLine().toUpperCase();
 				String color;*/
-				System.out.println("entered instanceof");
+				//System.out.println("entered instanceof");
 				switch(x){
 				case 'B':
 					color = b.board[to.getY()][to.convertX()].getColor();

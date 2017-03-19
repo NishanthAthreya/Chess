@@ -17,15 +17,20 @@ public class Knight extends Piece{
 	@Override
 	boolean canMove(Location newLoc, Board b) {
 		// TODO Auto-generated method stub
-		Piece checkPiece = this.getCheckPiece(b);
+		//System.out.println(this.location);
+		//System.out.println(newLoc == null);
+	/*	if (b.check==false)
+		{
+		Board copy = b.boardcopy();
+		copy.board[newLoc.getY()][newLoc.convertX()] = this;
+		copy.board[location.getY()][location.convertX()]=null;
+		Piece checkPiece = this.getCheckPiece(copy);
 		if (checkPiece!=null)
 		{
-			Location checkLoc = checkPiece.getLocation();
-			if (b.check == true &&!(this.canMove(checkLoc, b)) )
-			{
-				return false;
-			}
+			copy = null;
+			return false;
 		}
+		}*/
 		int diffX = Math.abs(this.location.convertX() - newLoc.convertX());
 		int diffY = Math.abs(this.location.getY() - newLoc.getY());
 		if(diffX == 1){
@@ -41,6 +46,65 @@ public class Knight extends Piece{
 	@Override
 	boolean moveTo(Location newLoc, Board b) {
 		// TODO Auto-generated method stub
+		if (b.check==false)
+		{
+		Board copy = b.boardcopy();
+		copy.board[newLoc.getY()][newLoc.convertX()] = this;
+		copy.board[location.getY()][location.convertX()]=null;
+		Piece checkPiece = this.getCheckPiece(copy);
+		if (checkPiece!=null)
+		{
+			copy = null;
+			System.out.println();
+			System.out.println("Illegal move, try again");
+			System.out.println();
+			return false;
+		}
+		}
+		Piece checkPiece = this.getCheckPiece(b);
+		//System.out.println(checkPiece);
+		/*if (b.check==true)
+		{
+			return false;
+		}*/
+		if (checkPiece!=null)
+		{
+			Location checkLoc = checkPiece.getLocation();
+			//boolean flag = false;
+			Board copy = b.boardcopy();
+			//Piece checkPiece2 = this.getCheckPiece(copy);
+			Piece checkPiece2 = copy.board[checkLoc.getY()][checkLoc.convertX()];
+			//System.out.println(checkPiece2);
+			if(canMove(newLoc, copy)){
+				copy.board[newLoc.getY()][newLoc.convertX()] = this;
+				Location opposKingsLoc = checkPiece2.getKingLocation(checkPiece2.getColor(), copy);
+				//System.out.println("copy: ");
+				//copy.draw();
+				if (checkPiece2.canMove(opposKingsLoc,copy))
+				{
+					copy = null;
+					System.out.println("about to return false");
+					return false;
+				}
+				else
+					return true;
+			}
+			if (b.check == true &&!(this.canMove(checkLoc, b)) )
+			{
+				//System.out.println("can't move");
+				System.out.println("Illegal movie, try again");
+				System.out.println();
+				System.out.println("Check");
+				return false;
+			}
+			else if(b.check == true && this.canMove(checkLoc, b) && !(newLoc.equals(checkLoc))){
+				System.out.println("Illegal movie, try again");
+				System.out.println();
+				System.out.println("Check");
+				return false;
+			}
+		}
+		//return super.moveTo(newLoc, b);
 		if(canMove(newLoc, b)){
 			this.location = newLoc;
 			Location opposKingsLoc = this.getKingLocation(this.color, b);

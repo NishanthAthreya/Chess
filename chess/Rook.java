@@ -18,15 +18,6 @@ public class Rook extends Piece{
 	public boolean canMove(Location newLoc, Board b)
 	{
 		//have to check that no pieces of same color are in the way
-		Piece checkPiece = this.getCheckPiece(b);
-		if (checkPiece!=null)
-		{
-			Location checkLoc = checkPiece.getLocation();
-			if (b.check == true &&!(this.canMove(checkLoc, b)) )
-			{
-				return false;
-			}
-		}
 		int currFile = location.convertX();
 		int currRank = location.getY();
 		int newFile = newLoc.convertX();
@@ -66,6 +57,8 @@ public class Rook extends Piece{
 			{
 				for (int c = currRank+1; c< newRank;c++)
 				{
+					System.out.println("list:");
+					System.out.println(b.board[c][currFile]);
 					if (b.board[c][currFile]!=null)//piece there
 					{
 						//System.out.println("Illegal move, try again.");
@@ -93,11 +86,39 @@ public class Rook extends Piece{
 	}
 	public boolean moveTo(Location newLoc, Board b)
 	{
+		Piece checkPiece = this.getCheckPiece(b);
+		//System.out.println(checkPiece);
+		/*if (b.check==true)
+		{
+			return false;
+		}*/
+		if (checkPiece!=null)
+		{
+			Location checkLoc = checkPiece.getLocation();
+			if (b.check == true &&!(this.canMove(checkLoc, b)) )
+			{
+				//System.out.println("can't move");
+				System.out.println("Illegal movie, try again");
+				System.out.println();
+				System.out.println("Check");
+				return false;
+			}
+		}
 		if (this.canMove(newLoc, b))
 		{
 			//System.out.println("this is a rook");
 			//hasMoved = true;
 			location = newLoc;
+			Location opposKingsLoc = this.getKingLocation(this.color, b);
+			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
+			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());
+			//System.out.println("called getKingLoc");
+			if (canMove(opposKingsLoc,b))
+			{
+				//System.out.println("entered");
+				b.check = true;
+				System.out.println("Check");
+			}
 		/*	Location opposKingsLoc = this.getKingLocation(this.color, b);
 			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
 			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());

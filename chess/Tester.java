@@ -24,13 +24,16 @@ public class Tester {
 			{
 				System.out.println();
 				System.out.print("White's move: ");
+				System.out.println();
 				String s = "";
-				while(s.length() < 5){
+				while(s.length() < 5 || s.length() > 5){
 					s = scan.nextLine();
-					if(s.length() < 5){
+					if(s.length() < 5 || s.length() > 5){
 						System.out.println();
 						System.out.println("Illegal move, try again");
+						System.out.println();
 						System.out.print("White's move: ");
+						System.out.println();
 					}
 				}
 				Location current = new Location(s.charAt(0),Integer.parseInt(s.charAt(1)+"")-1);
@@ -54,13 +57,16 @@ public class Tester {
 			{
 				System.out.println();
 				System.out.print("Black's move: ");
+				System.out.println();
 				String s = "";
-				while(s.length() < 5){
+				while(s.length() < 5 || s.length() > 5){
 					s = scan.nextLine();
-					if(s.length() < 5){
+					if(s.length() < 5 || s.length() > 5){
 						System.out.println();
-						System.out.println("Invalid input");
+						System.out.println("Illegal move, try again");
+						System.out.println();
 						System.out.print("Black's move: ");
+						System.out.println();
 					}
 				}
 				Location current = new Location(s.charAt(0),Integer.parseInt(s.charAt(1)+"")-1);

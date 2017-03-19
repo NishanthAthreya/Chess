@@ -23,7 +23,7 @@ public abstract class Piece {
 					
 					if (pieces[i][j].check==true)
 					{
-						System.out.println(pieces[i][j].check);
+						//System.out.println(pieces[i][j].check);
 						check = pieces[i][j];
 						break;
 					}

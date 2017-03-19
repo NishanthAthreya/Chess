@@ -39,4 +39,16 @@ public class Location {
 		}
 		return 0;
 	}
+	public boolean equals(Object o){
+		if(!(o instanceof Location))
+			return false;
+		else if(this == null || o == null)
+			return false;
+		else{
+			Location l = (Location)o;
+			if(this.getY() == l.getY() && this.convertX() == l.convertX())
+				return true;
+		}
+		return false;
+	}
 }

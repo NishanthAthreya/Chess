@@ -104,6 +104,9 @@ public class Bishop extends Piece{
 			if (b.check == true &&!(this.canMove(checkLoc, b)) )
 			{
 				//System.out.println("can't move");
+				System.out.println("Illegal movie, try again");
+				System.out.println();
+				System.out.println("Check");
 				return false;
 			}
 		}

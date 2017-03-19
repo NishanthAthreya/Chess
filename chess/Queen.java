@@ -10,15 +10,7 @@ public class Queen extends Piece{
 	}
 	@Override
 	boolean canMove(Location newLoc, Board b) {
-		Piece checkPiece = this.getCheckPiece(b);
-		if (checkPiece!=null)
-		{
-			Location checkLoc = checkPiece.getLocation();
-			if (b.check == true &&!(this.canMove(checkLoc, b)) )
-			{
-				return false;
-			}
-		}
+		
 		int currFile = location.convertX();
 		int currRank = location.getY();
 		int newFile = newLoc.convertX();
@@ -104,6 +96,24 @@ public class Queen extends Piece{
 
 	@Override
 	boolean moveTo(Location newLoc, Board b) {
+		Piece checkPiece = this.getCheckPiece(b);
+		//System.out.println(checkPiece);
+		/*if (b.check==true)
+		{
+			return false;
+		}*/
+		if (checkPiece!=null)
+		{
+			Location checkLoc = checkPiece.getLocation();
+			if (b.check == true &&!(this.canMove(checkLoc, b)) )
+			{
+				//System.out.println("can't move");
+				System.out.println("Illegal movie, try again");
+				System.out.println();
+				System.out.println("Check");
+				return false;
+			}
+		}
 		if (this.canMove(newLoc, b))
 		{
 			this.location = newLoc;
