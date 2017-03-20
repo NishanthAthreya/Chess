@@ -52,12 +52,12 @@ public class Knight extends Piece{
 		copy.board[newLoc.getY()][newLoc.convertX()] = this;
 		copy.board[location.getY()][location.convertX()]=null;
 		Piece checkPiece = this.getCheckPiece(copy);
-		if (checkPiece!=null)
+		if (checkPiece!=null && !(this.getColor().equals(checkPiece.getColor())))
 		{
 			copy = null;
-			System.out.println();
+			/*System.out.println();
 			System.out.println("Illegal move, try again");
-			System.out.println();
+			System.out.println();*/
 			return false;
 		}
 		}
@@ -67,7 +67,7 @@ public class Knight extends Piece{
 		{
 			return false;
 		}*/
-		if (checkPiece!=null)
+		if (checkPiece!=null )
 		{
 			Location checkLoc = checkPiece.getLocation();
 			//boolean flag = false;
@@ -77,29 +77,35 @@ public class Knight extends Piece{
 			//System.out.println(checkPiece2);
 			if(canMove(newLoc, copy)){
 				copy.board[newLoc.getY()][newLoc.convertX()] = this;
+				copy.board[location.getY()][location.convertX()]=null;
+				checkPiece2 = this.getCheckPiece(copy);
+				if(checkPiece2 == null)
+					return true;
 				Location opposKingsLoc = checkPiece2.getKingLocation(checkPiece2.getColor(), copy);
 				//System.out.println("copy: ");
 				//copy.draw();
+				//System.out.println(checkPiece2);
 				if (checkPiece2.canMove(opposKingsLoc,copy))
 				{
 					copy = null;
-					System.out.println("about to return false");
+					//System.out.println("about to return false");
 					return false;
 				}
 				else
+					//System.out.println("about to return true");
 					return true;
 			}
 			if (b.check == true &&!(this.canMove(checkLoc, b)) )
 			{
 				//System.out.println("can't move");
-				System.out.println("Illegal movie, try again");
-				System.out.println();
+				/*System.out.println("Illegal movie, try again");
+				System.out.println();*/
 				System.out.println("Check");
 				return false;
 			}
 			else if(b.check == true && this.canMove(checkLoc, b) && !(newLoc.equals(checkLoc))){
-				System.out.println("Illegal movie, try again");
-				System.out.println();
+				/*System.out.println("Illegal movie, try again");
+				System.out.println();*/
 				System.out.println("Check");
 				return false;
 			}
@@ -119,8 +125,8 @@ public class Knight extends Piece{
 			}
 			return true;
 		}
-		System.out.println("Illegal move, try again");
-		System.out.println();
+		/*System.out.println("Illegal move, try again");
+		System.out.println();*/
 		return false;
 	}
 	

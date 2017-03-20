@@ -70,10 +70,13 @@ public class Player {
 				return true;
 				}	
 			else{
-				if(canMove){
+				/*if(canMove){
 					System.out.println("Illegal move, try again");
 					System.out.println();
-				}
+				}*/
+				System.out.println();
+				System.out.println("Illegal move, try again");
+				System.out.println();
 				return false;
 			}
 		}
@@ -150,9 +153,9 @@ public class Player {
 			}
 			return true;
 		}
-		//System.out.println();
-		//System.out.println("Invalid move, try again");
-		//System.out.println();
+		System.out.println();
+		System.out.println("Illegal move, try again");
+		System.out.println();
 		return false;
 	}
 	public boolean isCheckMate(Board b)
@@ -167,18 +170,39 @@ public class Player {
 		{
 			for (int j = 0; j<pieces[0].length;j++)
 			{
-				if (this.color.equals("black"))
+				if (pieces[i][j] != null && this.color.equals("black"))
 				{
-				if (pieces[i][j].equals("wK"))
+				if (pieces[i][j].toString().equals("wK"))
 				{
 					king = pieces[i][j];
 				}
 				}
-				else if (this.color.equals("white"))
+				else if (pieces[i][j] != null && this.color.equals("white"))
 				{
-					if (pieces[i][j].equals("bK"))
+					if (pieces[i][j].toString().equals("bK"))
 					{
 						king = pieces[i][j];
+					}
+				}
+			}
+		}
+		for(int i = 0;i < b.board.length;i++){
+			for(int j = 0;j < b.board[i].length;j++){
+				Piece p = b.board[i][j];
+				if(p != null && p.getColor().equals(king.getColor())){
+					for(int x = 0; x < b.board.length;x++){
+						for(int y = 0;y < b.board[x].length;y++){
+							Board copy = b.boardcopy();
+							Location location = p.getLocation();
+							Location newLoc = new Location((char)('a'+x),y);
+							copy.board[newLoc.getY()][newLoc.convertX()] = p;
+							copy.board[location.getY()][location.convertX()]=null;
+							Piece checkPiece = p.getCheckPiece(copy);
+							if (checkPiece==null)
+							{
+								return false;
+							}
+						}
 					}
 				}
 			}
@@ -195,7 +219,7 @@ public class Player {
 					{
 						for (int y = 0; y<b.board[0].length;y++)
 						{
-							if(!(b.board[x][y].canMove(loc, b)))	//have to check that it's opposite color!!
+							if(b.board[x][y] != null && !(b.board[x][y].canMove(loc, b)) && !(b.board[x][y].getColor().equals(king.getColor())))	//have to check that it's opposite color!!
 							{
 								return false;			//not a checkmate, king can move there
 							}

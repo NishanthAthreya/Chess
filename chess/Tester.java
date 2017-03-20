@@ -10,11 +10,11 @@ public class Tester {
 		//System.out.println();
 		//b.draw2();
 		int turn = 1;
-		int i = 0;
+		//int i = 0;
 		Player one = new Player("white");
 		Player two = new Player("black");
 		Scanner scan = new Scanner(System.in);
-		while (i<1000)	//until game ends
+		while (!one.isCheckMate(b) && !two.isCheckMate(b))	//until game ends
 		{
 		char c = ' ';
 		if (turn%2!=0)
@@ -28,7 +28,19 @@ public class Tester {
 				String s = "";
 				while(s.length() < 5 || s.length() > 5){
 					s = scan.nextLine();
-					if(s.length() < 5 || s.length() > 5){
+					if(s.equalsIgnoreCase("resign")){
+						System.out.println();
+						System.out.println("Black wins");
+						System.exit(0);
+					}
+					else if(s.contains("draw?")){
+						s = scan.nextLine();
+						if(s.equals("draw"))
+							System.exit(0);
+						else
+							s = "notdraw";		
+					}
+					if((s.length() < 5 || s.length() > 5) && !(s.equals("notdraw"))){
 						System.out.println();
 						System.out.println("Illegal move, try again");
 						System.out.println();
@@ -61,7 +73,20 @@ public class Tester {
 				String s = "";
 				while(s.length() < 5 || s.length() > 5){
 					s = scan.nextLine();
-					if(s.length() < 5 || s.length() > 5){
+					if(s.equalsIgnoreCase("resign")){
+						System.out.println();
+						System.out.println("White wins");
+						System.exit(0);
+					}
+					else if(s.contains("draw?")){
+						s = scan.nextLine();
+						if(s.equals("draw"))
+							System.exit(0);
+						else
+							s = "notdraw";
+							
+					}
+					if((s.length() < 5 || s.length() > 5) && !(s.equals("notdraw"))){
 						System.out.println();
 						System.out.println("Illegal move, try again");
 						System.out.println();
@@ -83,8 +108,15 @@ public class Tester {
 			}
 			turn++;
 		}
-		i++;
+		//i++;
 	}
+		if(one.isCheckMate(b)){
+			System.out.println();
+			System.out.println("White wins");
+		}else{
+			System.out.println();
+			System.out.println("Black wins");
+		}
 		scan.close();
 	}
 }

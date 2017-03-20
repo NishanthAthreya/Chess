@@ -57,8 +57,8 @@ public class Rook extends Piece{
 			{
 				for (int c = currRank+1; c< newRank;c++)
 				{
-					System.out.println("list:");
-					System.out.println(b.board[c][currFile]);
+					/*System.out.println("list:");
+					System.out.println(b.board[c][currFile]);*/
 					if (b.board[c][currFile]!=null)//piece there
 					{
 						//System.out.println("Illegal move, try again.");
@@ -86,6 +86,22 @@ public class Rook extends Piece{
 	}
 	public boolean moveTo(Location newLoc, Board b)
 	{
+		if (b.check==false)
+		{
+		Board copy = b.boardcopy();
+		copy.board[newLoc.getY()][newLoc.convertX()] = this;
+		copy.board[location.getY()][location.convertX()]=null;
+		Piece checkPiece = this.getCheckPiece(copy);
+		if (checkPiece!=null && !(this.getColor().equals(checkPiece.getColor())))
+		{
+			copy = null;
+			/*System.out.println();
+			System.out.println("Illegal move, try again");
+			System.out.println();*/
+			//System.out.println("57");
+			return false;
+		}
+		}
 		Piece checkPiece = this.getCheckPiece(b);
 		//System.out.println(checkPiece);
 		/*if (b.check==true)
@@ -95,12 +111,42 @@ public class Rook extends Piece{
 		if (checkPiece!=null)
 		{
 			Location checkLoc = checkPiece.getLocation();
+			Board copy = b.boardcopy();
+			//Piece checkPiece2 = this.getCheckPiece(copy);
+			Piece checkPiece2 = copy.board[checkLoc.getY()][checkLoc.convertX()];
+			//System.out.println(checkPiece2);
+			if(canMove(newLoc, copy)){
+				copy.board[newLoc.getY()][newLoc.convertX()] = this;
+				copy.board[location.getY()][location.convertX()]=null;
+				checkPiece2 = this.getCheckPiece(copy);
+				if(checkPiece2 == null)
+					return true;
+				Location opposKingsLoc = checkPiece2.getKingLocation(checkPiece2.getColor(), copy);
+				//System.out.println("copy: ");
+				//copy.draw();
+				if (checkPiece2.canMove(opposKingsLoc,copy))
+				{
+					copy = null;
+					//System.out.println("about to return false");
+					return false;
+				}
+				else
+					return true;
+			}
 			if (b.check == true &&!(this.canMove(checkLoc, b)) )
 			{
 				//System.out.println("can't move");
-				System.out.println("Illegal movie, try again");
+				/*System.out.println("Illegal movie, try again");
+				System.out.println();*/
+				//System.out.println("Check");
+				//System.out.println("1");
+				return false;
+			}
+			else if(b.check == true && this.canMove(checkLoc, b) && !(newLoc.equals(checkLoc))){
+				/*System.out.println("Illegal movie, try again");
 				System.out.println();
-				System.out.println("Check");
+				System.out.println("Check");*/
+				//System.out.println("2");
 				return false;
 			}
 		}
@@ -137,8 +183,9 @@ public class Rook extends Piece{
 			return true;
 		}
 		
-			System.out.println("Illegal move, try again");
-			System.out.println();
+			/*System.out.println("Illegal move, try again");
+			System.out.println();*/
+		//System.out.println("3");
 			return false;
 		
 	}
