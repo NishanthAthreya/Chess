@@ -18,6 +18,8 @@ public class King extends Piece{
 		int newRank = newLoc.getY();
 		int fileDiff = Math.abs(newFile - currFile);
 		int rankDiff = Math.abs(newRank - currRank);
+		System.out.println(this.location.convertX() + " " + this.location.getY());
+		System.out.println(newLoc.convertX() + " " + newLoc.getY());
 		Piece[][] pieces = b.board;
 			if (this.color == "white")		//castling
 			{
@@ -25,17 +27,17 @@ public class King extends Piece{
 				{
 					if (hasMoved == true || currRank!=newRank)
 					{
-						//System.out.println("hasMoved is true or currRank is not equal to newRank");
+						System.out.println("hasMoved is true or currRank is not equal to newRank");
 						return false;
 					}
 					if (pieces[0][7] == null)
 					{
-						//System.out.println("rook is not there");
+						System.out.println("rook is not there");
 						return false;
 					}
 					if (!(pieces[0][7].toString().equals("wR")))
 					{
-						//System.out.println("rooks toString is not matching");
+						System.out.println("rooks toString is not matching");
 						return false;
 					}
 					for (int i = currFile+1; i<newFile; i++)
@@ -55,20 +57,24 @@ public class King extends Piece{
 				{
 					if (hasMoved == true || currRank!=newRank)
 					{
+						System.out.println("king0.5");
 						return false;
 					}
 					if (pieces[0][0] == null)
 					{
+						System.out.println("king");
 						return false;
 					}
 					if (!(pieces[0][0].toString().equals("wR")))
 					{
+						System.out.println("king1");
 						return false;
 					}
 					for (int i = currFile-1; i>newFile; i--)
 					{
 						if (pieces[currRank][i]!=null)
 						{
+							System.out.println("king2");
 							return false; 	//piece there, can't castle
 						}
 					}
@@ -84,14 +90,17 @@ public class King extends Piece{
 				{
 					if (hasMoved == true || currRank!=newRank)
 					{
+						System.out.println("king3");
 						return false;
 					}
 					if (pieces[7][7] == null)
 					{
+						System.out.println("king4");
 						return false;
 					}
 					if (!(pieces[7][7].toString().equals("bR")))
 					{
+						System.out.println("king5");
 						return false;
 					}
 					for (int i = currFile+1; i<newFile; i++)
@@ -109,14 +118,17 @@ public class King extends Piece{
 				{
 					if (hasMoved == true || currRank!=newRank)
 					{
+						System.out.println("king6");
 						return false;
 					}
 					if (pieces[7][0] == null)
 					{
+						System.out.println("king7");
 						return false;
 					}
 					if (!(pieces[7][0].toString().equals("bR")))
 					{
+						System.out.println("king8");
 						return false;
 					}
 					for (int i = currFile-1; i>newFile; i--)
@@ -133,10 +145,12 @@ public class King extends Piece{
 			}
 		if (b.board[newRank][newFile]!=null && b.board[newRank][newFile].getColor() == this.color)
 		{
+			System.out.println("king9");
 			return false;
 		}
 		if (currFile == newFile && rankDiff == 1)
 		{
+			System.out.println("king10");
 			return true;
 		}
 		if (currRank == newRank && fileDiff == 1)
@@ -147,6 +161,7 @@ public class King extends Piece{
 		{
 			return true;
 		}
+		System.out.println("king11");
 		return false;
 	}
 	public boolean moveTo(Location newLoc, Board b)

@@ -56,7 +56,12 @@ public class Tester {
 						c = s.charAt(6);
 					}
 				}
-				flag = one.move(b,current,movingto, c);
+				flag = one.move(b,current,movingto, c, false);
+				if(!flag){
+					System.out.println();
+					System.out.println("Illegal move, try again");
+					System.out.println();
+				}
 				b.draw();
 				//System.out.println();
 				//b.draw2();
@@ -101,7 +106,7 @@ public class Tester {
 						c = s.charAt(6);
 					}
 				}
-				flag = two.move(b, current, movingto, c);
+				flag = two.move(b, current, movingto, c, false);
 				b.draw();
 				//System.out.println();
 			//	b.draw2();

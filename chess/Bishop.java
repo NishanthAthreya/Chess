@@ -105,6 +105,8 @@ public class Bishop extends Piece{
 			System.out.println("Illegal move, try again");
 			System.out.println();*/
 			//System.out.println("3");
+			System.out.println(checkPiece);
+			System.out.println(1);
 			return false;
 		}
 		}
@@ -134,6 +136,7 @@ public class Bishop extends Piece{
 				{
 					copy = null;
 					//System.out.println("about to return false");
+					System.out.println(2);
 					return false;
 				}
 				else
@@ -146,6 +149,7 @@ public class Bishop extends Piece{
 				System.out.println();*/
 				//System.out.println("1");
 				//System.out.println("Check");
+				System.out.println(3);
 				return false;
 			}
 			else if(b.check == true && this.canMove(checkLoc, b) && !(newLoc.equals(checkLoc))){
@@ -153,6 +157,7 @@ public class Bishop extends Piece{
 				System.out.println();*/
 				//System.out.println("2");
 				//System.out.println("Check");
+				System.out.println(4);
 				return false;
 			}
 		}
@@ -176,6 +181,7 @@ public class Bishop extends Piece{
 		/*System.out.println("Illegal movie, try again");
 		System.out.println();*/
 		//System.out.println("4");
+		System.out.println(5);
 		return false;
 	}
 	public String getColor()

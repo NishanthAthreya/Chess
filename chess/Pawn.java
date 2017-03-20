@@ -109,6 +109,7 @@ public class Pawn extends Piece{
 			/*System.out.println();
 			System.out.println("Illegal move, try again");
 			System.out.println();*/
+			System.out.println(1);
 			return false;
 		}
 		}
@@ -138,6 +139,7 @@ public class Pawn extends Piece{
 			{
 				copy = null;
 				//System.out.println("about to return false");
+				System.out.println(2);
 				return false;
 			}
 			else
@@ -148,11 +150,13 @@ public class Pawn extends Piece{
 			//System.out.println("can't move");
 			/*System.out.println("Illegal movie, try again");
 			System.out.println();*/
+			System.out.println(3);
 			return false;
 		}
 		else if(b.check == true && this.canMove(checkLoc, b) && !(newLoc.equals(checkLoc))){
 			/*System.out.println("Illegal movie, try again");
 			System.out.println();*/
+			System.out.println(4);
 			System.out.println("Check");
 			return false;
 		}
@@ -176,6 +180,7 @@ public class Pawn extends Piece{
 		}
 		/*System.out.println("Illegal move, try again");
 		System.out.println();*/
+		System.out.println(5);
 		return false;
 	}
 	public Location getLocation()
