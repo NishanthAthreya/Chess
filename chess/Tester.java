@@ -14,7 +14,8 @@ public class Tester {
 		Player one = new Player("white");
 		Player two = new Player("black");
 		Scanner scan = new Scanner(System.in);
-		while (!one.isCheckMate(b) && !two.isCheckMate(b))	//until game ends
+		boolean f = false;
+		while (!f/*!one.isCheckMate(b) && !two.isCheckMate(b)*/)	//until game ends
 		{
 		char c = ' ';
 		if (turn%2!=0)
@@ -67,6 +68,7 @@ public class Tester {
 				//b.draw2();
 			}
 			turn++;
+			f = two.isCheckMate(b);
 		}
 		else{
 			boolean flag = false;
@@ -112,10 +114,11 @@ public class Tester {
 			//	b.draw2();
 			}
 			turn++;
+			f = one.isCheckMate(b);
 		}
 		//i++;
 	}
-		if(one.isCheckMate(b)){
+		if(/*one.isCheckMate(b)*/turn % 2 == 0){
 			System.out.println();
 			System.out.println("White wins");
 		}else{

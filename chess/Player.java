@@ -29,6 +29,9 @@ public class Player {
 				}
 				//
 				Location opposKingsLoc = curr.getKingLocation(this.color, b);
+				/*System.out.println(curr);
+				System.out.println(curr.getLocation().getX() + " " + curr.getLocation().getY());
+				System.out.println(opposKingsLoc.getX() + " " + opposKingsLoc.getY());*/
 				if (curr.canMove(opposKingsLoc, b))
 				{
 					curr.check = true;
@@ -41,6 +44,7 @@ public class Player {
 				}
 				else
 				{
+					//System.out.println("yes");
 					curr.check = false;
 					b.check = false;
 					Piece checkPiece = curr.getCheckPiece(b);
@@ -83,9 +87,9 @@ public class Player {
 				/*System.out.println();
 				System.out.println("Illegal move, try again");
 				System.out.println();*/
-				System.out.println("player1");
+				/*System.out.println("player1");
 				System.out.println("canMove: " + canMove);
-				System.out.println("other: " + p.getColor().equals(color));
+				System.out.println("other: " + p.getColor().equals(color));*/
 				return false;
 			}
 		}
@@ -121,6 +125,9 @@ public class Player {
 			b.board[init.getY()][init.convertX()]=null;
 			//
 			Location opposKingsLoc = curr.getKingLocation(this.color, b);
+			/*System.out.println(curr);
+			System.out.println(curr.getLocation().getX() + " " + curr.getLocation().getY());
+			System.out.println(opposKingsLoc.getX() + " " + opposKingsLoc.getY());*/
 			if (curr.canMove(opposKingsLoc, b))
 			{
 				curr.check = true;
@@ -132,6 +139,7 @@ public class Player {
 				}
 			}
 			else {
+				//System.out.println("yes");
 				curr.check = false;
 				b.check = false;
 				Piece checkPiece = curr.getCheckPiece(b);
@@ -171,16 +179,17 @@ public class Player {
 		/*System.out.println();
 		System.out.println("Illegal move, try again");
 		System.out.println();*/
-		System.out.println("random");
+		//System.out.println("random");
 		return false;
 	}
 	public boolean isCheckMate(Board b)
 	{
 		if (!b.check)
 		{
+			//System.out.println("no");
 			return false;
 		}
-		/*Piece[][] pieces = b.board; 
+		Piece[][] pieces = b.board; 
 		Piece king = null;
 		for (int i = 0; i < pieces.length; i++)
 		{
@@ -202,42 +211,66 @@ public class Player {
 				}
 			}
 		}
-		if(king.getCheckPiece(b).getColor().equals(king.getColor()))
+		Piece myKing = null;
+		for (int i = 0; i < pieces.length; i++)
+		{
+			for (int j = 0; j<pieces[0].length;j++)
+			{
+				if (pieces[i][j] != null && this.color.equals("black"))
+				{
+				if (pieces[i][j].toString().equals("bK"))
+				{
+					myKing = pieces[i][j];
+				}
+				}
+				else if (pieces[i][j] != null && this.color.equals("white"))
+				{
+					if (pieces[i][j].toString().equals("wK"))
+					{
+						myKing = pieces[i][j];
+					}
+				}
+			}
+		}
+		if(king.getCheckPiece(b).getColor().equals(this.color))
 			return false;
-		Location kingsLoc = king.getLocation();
+		//Location kingsLoc = king.getLocation();
 		for(int i = 0;i < b.board.length;i++){
 			for(int j = 0;j < b.board[i].length;j++){
 				Piece p = b.board[i][j];
-				if(p != null && p.getColor().equals(king.getColor())){
+				if(p != null && p.getColor().equals(this.color)){
 					Piece cp = p.getCheckPiece(b);
 					for(int x = 0; x < b.board.length;x++){
 						for(int y = 0;y < b.board[x].length;y++){
+							if(p.toString().equals("bK") || p.toString().equals("wK")){
+								break;
+							}
 							Board copy = b.boardcopy();
 							Location location = new Location((char)('a'+j),i);
-							System.out.println(p);
+							/*System.out.println(p);
 							System.out.println(location.getX() + " " + location.getY());
-							System.out.println(p.getLocation().getX() + " " + p.getLocation().getY());
+							System.out.println(p.getLocation().getX() + " " + p.getLocation().getY());*/
 							Location newLoc = new Location((char)('a'+y),x);
-							System.out.println(newLoc.getX() + " " + newLoc.getY());
+							//System.out.println(newLoc.getX() + " " + newLoc.getY());
 							boolean bl = this.move(copy, location, newLoc, 'Q', true); 
-							System.out.println(bl);
+							//System.out.println(bl);
 							if(bl){
 								Piece checkPiece = p.getCheckPiece(copy);
 								if (checkPiece==null)
 								{
-									System.out.println("here 1");
+									//System.out.println("here 1");
 									b.board[i][j].setLocation(location);
 									cp.check = true;
 									b.check = true;
 									return false;
-								}else{
+								}/*else{
 									System.out.println(checkPiece);
-								}
+								}*/
 							}
-							System.out.println("left");
+							//System.out.println("left");
 							cp.check = true;
 							b.check = true;
-							b.board[i][j].setLocation(location);*/
+							b.board[i][j].setLocation(location);
 							//copy.board[newLoc.getY()][newLoc.convertX()] = p;
 							//copy.board[location.getY()][location.convertX()]=null;
 							/*for(int r = 0;r < copy.board.length;r++){
@@ -253,26 +286,42 @@ public class Player {
 								System.out.println("here 1");
 								return false;
 							}*/
-					/*	}
+						}
 					}
 				}
 			}
-		}*/
-		/*for (int i = kingsLoc.getY()-1; i< kingsLoc.getY()+2; i++)
+		}
+		Location mykingloc = myKing.getLocation();
+		for (int i = mykingloc.getY()-1; i< mykingloc.getY()+2; i++)
 		{
-			for (int j = kingsLoc.convertX()-1; j<kingsLoc.convertX()+2;j++)
+			for (int j = mykingloc.convertX()-1; j<mykingloc.convertX()+2;j++)
 			{
 				Location loc = new Location((char)('a'+j),i);
 				Board copy = b.boardcopy();
 				
-				if (i >=0 && i<=7 && j>=0 && j<=7 && this.move(copy, kingsLoc, loc, 'Q', true))
+				if (i >=0 && i<=7 && j>=0 && j<=7 && myKing.canMove(loc, copy)/*this.move(copy, mykingloc, loc, 'Q', true)*/)
 				{
-					System.out.println("here in if 2");
+					boolean f = true;
+					for(int x = 0;x < copy.board.length;x++){
+						for(int y = 0;y < copy.board[x].length;y++){
+							Piece p = copy.board[x][y];
+							if(p != null && !p.getColor().equals(this.color) && p.canMove(loc, copy)/*&& p.moveTo(mykingloc, copy)*/){
+								f = false;
+								break;
+							}
+						}
+						if(!f)
+							break;
+					}
+					if(f)
+						return false;
+					/*System.out.println("here in if 2");
 					if(!copy.check)
 					{
-						king.setLocation(kingsLoc);
+						myKing.setLocation(mykingloc);
+						//b.check = true;
 						return false;
-					} left off*/
+					} */
 					/*for (int x = 0; x< b.board.length; x++)
 					{
 						for (int y = 0; y<b.board[0].length;y++)
@@ -284,11 +333,13 @@ public class Player {
 							}
 						}
 					}*/
-				//}
+				}
+					//b.check = true;
+					myKing.setLocation(mykingloc);
 				//king.setLocation(kingsLoc);
-			//}
-		//}
+			}
+		}
 			
-		return false;
+		return true;
 	}
 }
