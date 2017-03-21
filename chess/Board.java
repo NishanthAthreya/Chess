@@ -54,6 +54,7 @@ public class Board {
 	}
 	public Board boardcopy(){
 		Board copy = new Board();
+		copy.check = this.check;
 		for(int i = 0;i < board.length;i++){
 			for(int j = 0;j < board[i].length;j++){
 				copy.board[i][j] = this.board[i][j];

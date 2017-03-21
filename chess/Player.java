@@ -247,13 +247,13 @@ public class Player {
 							}
 							Board copy = b.boardcopy();
 							Location location = new Location((char)('a'+j),i);
-							/*System.out.println(p);
+							System.out.println(p);
 							System.out.println(location.getX() + " " + location.getY());
-							System.out.println(p.getLocation().getX() + " " + p.getLocation().getY());*/
+							System.out.println(p.getLocation().getX() + " " + p.getLocation().getY());
 							Location newLoc = new Location((char)('a'+y),x);
-							//System.out.println(newLoc.getX() + " " + newLoc.getY());
+							System.out.println(newLoc.getX() + " " + newLoc.getY());
 							boolean bl = this.move(copy, location, newLoc, 'Q', true); 
-							//System.out.println(bl);
+							System.out.println(bl);
 							if(bl){
 								Piece checkPiece = p.getCheckPiece(copy);
 								if (checkPiece==null)

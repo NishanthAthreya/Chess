@@ -77,6 +77,8 @@ public class Knight extends Piece{
 			Piece checkPiece2 = copy.board[checkLoc.getY()][checkLoc.convertX()];
 			//System.out.println(checkPiece2);
 			if(canMove(newLoc, copy)){
+				if(copy.board[newLoc.getY()][newLoc.convertX()] != null && this.getColor().equals(copy.board[newLoc.getY()][newLoc.convertX()] .getColor()))//same color
+					return false;//new
 				copy.board[newLoc.getY()][newLoc.convertX()] = this;
 				copy.board[location.getY()][location.convertX()]=null;
 				checkPiece2 = this.getCheckPiece(copy);
