@@ -1,5 +1,7 @@
 package chess;
 /**
+ * This class defines a rook and all of its basic moves. This class overrides all the methods
+ * from the Piece abstract class.
  * 
  * @author Pranav Kanukollu, pvk9		
  * @author Nishanth Athreya, nsa48
@@ -10,11 +12,23 @@ public class Rook extends Piece{
 	private Location location;
 	boolean check = false;
 	//boolean hasMoved = false;
+	/**
+	 * Constructor.
+	 * 
+	 * @param location Current location of the rook.
+	 * @param color	Color of the rook.
+	 */
 	public Rook(Location location, String color)
 	{
 		this.location = location;
 		this.color = color;
 	}
+	/**
+	 * This method checks if the rook can move to a specified location on the board. 
+	 * @param newLoc This is a Location object parameter which is the new Location where the rook is trying to move.
+	 * @param b This is a Board object parameter, which is where the piece is moving on
+	 * @return boolean This method returns true or false based on whether or not the rook can move to the the newLoc.
+	 */
 	public boolean canMove(Location newLoc, Board b)
 	{
 		//have to check that no pieces of same color are in the way
@@ -68,7 +82,7 @@ public class Rook extends Piece{
 			}
 			else if (currRank>newRank) //going down
 			{
-				for (int c = currFile-1; c>newFile;c--)
+				for (int c = currRank-1; c>newRank;c--)
 				{
 					if (b.board[c][currFile]!=null)//piece there
 					{
@@ -80,10 +94,22 @@ public class Rook extends Piece{
 		}
 		return true;
 	}
+	/**
+	 * This method returns the color of the rook.
+	 * @return String The type of the color is String.
+	 */
 	public String getColor()
 	{
 		return color;
 	}
+	/**
+	 * This method takes into account whether or not there is a check on a king, in which case
+	 * it can't move. It takes into account various cases where it can move even if there is a check. 
+	 * It finally returns true or false based on whether it moved or not.
+	 * @param newLoc Location object parameter, which is where the rook is trying to move to.
+	 * @param b Board object parameter, which is where the rook is moving on.
+	 * @return boolean Returns true or false based on whether the rook has moved or not.
+	 */
 	public boolean moveTo(Location newLoc, Board b)
 	{
 		if (b.check==false)
@@ -91,6 +117,18 @@ public class Rook extends Piece{
 		Board copy = b.boardcopy();
 		copy.board[newLoc.getY()][newLoc.convertX()] = this;
 		copy.board[location.getY()][location.convertX()]=null;
+		for(int r = 0;r < copy.board.length;r++){//new check
+			for(int c = 0;c < copy.board[r].length;c++){
+				Piece piece = copy.board[r][c];
+				if(piece != null && !(piece.getColor().equals(this.color))){
+					Location opposKingsLoc = piece.getKingLocation(piece.getColor(), copy);
+					if(piece.canMove(opposKingsLoc, copy)){
+						copy = null;
+						return false;
+					}
+				}
+			}
+		}
 		Piece checkPiece = this.getCheckPiece(copy);
 		if (checkPiece!=null && !(this.getColor().equals(checkPiece.getColor())))
 		{
@@ -99,7 +137,7 @@ public class Rook extends Piece{
 			System.out.println("Illegal move, try again");
 			System.out.println();*/
 			//System.out.println("57");
-			System.out.println(1);
+			//System.out.println(1);
 			return false;
 		}
 		}
@@ -131,7 +169,7 @@ public class Rook extends Piece{
 				{
 					copy = null;
 					//System.out.println("about to return false");
-					System.out.println(2);
+					//System.out.println(2);
 					return false;
 				}
 				else
@@ -144,7 +182,7 @@ public class Rook extends Piece{
 				System.out.println();*/
 				//System.out.println("Check");
 				//System.out.println("1");
-				System.out.println(3);
+				//System.out.println(3);
 				return false;
 			}
 			else if(b.check == true && this.canMove(checkLoc, b) && !(newLoc.equals(checkLoc))){
@@ -152,7 +190,7 @@ public class Rook extends Piece{
 				System.out.println();
 				System.out.println("Check");*/
 				//System.out.println("2");
-				System.out.println(4);
+				//System.out.println(4);
 				return false;
 			}
 		}
@@ -169,7 +207,7 @@ public class Rook extends Piece{
 			{
 				//System.out.println("entered");
 				b.check = true;
-				System.out.println("Check");
+				//System.out.println("Check");
 			}
 		/*	Location opposKingsLoc = this.getKingLocation(this.color, b);
 			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
@@ -192,10 +230,14 @@ public class Rook extends Piece{
 			/*System.out.println("Illegal move, try again");
 			System.out.println();*/
 		//System.out.println("3");
-		System.out.println(5);
+		//System.out.println(5);
 			return false;
 		
 	}
+	/**
+	 * This method returns a String version of the Rook based on its color.
+	 * @return String 
+	 */
 	public String toString()
 	{
 		if (color.equals("black"))
@@ -204,10 +246,19 @@ public class Rook extends Piece{
 		}
 		return "wR";
 	}
+	/**
+	 * This method returns the current location of the rook.
+	 * @return Location Return type is a Location object.
+	 */
 	public Location getLocation()
 	{
 		return location;
 	}
+	/**
+	 * This method sets the location of the rook to a new Location.
+	 * @param newLoc This is a Location object which will be set to the location field of the rook.
+	 * @return Nothing
+	 */
 	public void setLocation(Location newLoc)
 	{
 		location = newLoc;

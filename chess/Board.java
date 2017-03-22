@@ -1,5 +1,15 @@
 package chess;
-
+/**
+ * This class defines a chess board. This board keeps track of where each piece is located by storing all the pieces in
+ * a 2D array. All pieces can be accessed via the board, so that information about each individual piece can be
+ * retrieved when necessary.
+ * 
+ * @author Pranav Kanukollu, pvk9		
+ * @author Nishanth Athreya, nsa48
+ */
+/**
+ * Constructor.
+ */
 public class Board {
 	Piece[][] board; 
 	Location BlackKingsLocation;
@@ -8,6 +18,10 @@ public class Board {
 		board = new Piece[8][8];
 		init();
 	}
+	/**
+	 * This method creates the pieces and populates the pieces in their appropriate locations so that the board
+	 * is ready for the first move. All pieces are placed in their initial locations.
+	 */
 	public void init(){
 		board[7][0] = new Rook(new Location('a', 7), "black");
 		board[7][7] = new Rook(new Location('h', 7), "black");
@@ -32,6 +46,9 @@ public class Board {
 		board[0][3] = new Queen(new Location('d', 0), "white");
 		board[0][4] = new King(new Location('e', 0),"white");
 	}
+	/**
+	 * This method prints out the chess board.
+	 */
 	public void draw(){
 		for(int r = board.length - 1;r >= 0;r--){
 			for(int c = 0;c < board[r].length;c++){
@@ -52,6 +69,10 @@ public class Board {
 		}
 		System.out.println();
 	}
+	/**
+	 * This method creates a copy of this board.
+	 * @return Board The method returns the copy of the board.
+	 */
 	public Board boardcopy(){
 		Board copy = new Board();
 		copy.check = this.check;

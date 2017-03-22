@@ -97,6 +97,18 @@ public class Bishop extends Piece{
 		Board copy = b.boardcopy();
 		copy.board[newLoc.getY()][newLoc.convertX()] = this;
 		copy.board[location.getY()][location.convertX()]=null;
+		for(int r = 0;r < copy.board.length;r++){//new check
+			for(int c = 0;c < copy.board[r].length;c++){
+				Piece piece = copy.board[r][c];
+				if(piece != null && !(piece.getColor().equals(this.color))){
+					Location opposKingsLoc = piece.getKingLocation(piece.getColor(), copy);
+					if(piece.canMove(opposKingsLoc, copy)){
+						copy = null;
+						return false;
+					}
+				}
+			}
+		}
 		Piece checkPiece = this.getCheckPiece(copy);
 		if (checkPiece!=null && !(this.getColor().equals(checkPiece.getColor())))
 		{
@@ -105,8 +117,8 @@ public class Bishop extends Piece{
 			System.out.println("Illegal move, try again");
 			System.out.println();*/
 			//System.out.println("3");
-			System.out.println(checkPiece);
-			System.out.println(1);
+			//System.out.println(checkPiece);
+			//System.out.println(1);
 			return false;
 		}
 		}
@@ -138,7 +150,7 @@ public class Bishop extends Piece{
 				{
 					copy = null;
 					//System.out.println("about to return false");
-					System.out.println(2);
+					//System.out.println(2);
 					return false;
 				}
 				else
@@ -151,7 +163,7 @@ public class Bishop extends Piece{
 				System.out.println();*/
 				//System.out.println("1");
 				//System.out.println("Check");
-				System.out.println(3);
+				//System.out.println(3);
 				return false;
 			}
 			else if(b.check == true && this.canMove(checkLoc, b) && !(newLoc.equals(checkLoc))){
@@ -159,8 +171,27 @@ public class Bishop extends Piece{
 				System.out.println();*/
 				//System.out.println("2");
 				//System.out.println("Check");
-				System.out.println(4);
+				//System.out.println(4);
 				return false;
+			}
+		}
+		else{
+			Board copy = b.boardcopy();
+			copy.board[newLoc.getY()][newLoc.convertX()] = this;
+			copy.board[location.getY()][location.convertX()]=null;
+			for(int r = 0;r < copy.board.length;r++){//new check
+				for(int c = 0;c < copy.board[r].length;c++){
+					Piece p = copy.board[r][c];
+					if(p == null)
+						break;
+					if(p.getColor().equals(this.color))
+						break;
+					Location opposKingsLoc = p.getKingLocation(p.getColor(), copy);
+					if(p.canMove(opposKingsLoc, b)){
+						copy = null;
+						return false;
+					}
+				}
 			}
 		}
 		if (this.canMove(newLoc, b))
@@ -175,7 +206,7 @@ public class Bishop extends Piece{
 			{
 				//System.out.println("entered");
 				b.check = true;
-				System.out.println("Check");
+				//System.out.println("Check");
 			}
 			//System.out.println("ready to return true");
 			return true;
@@ -183,7 +214,7 @@ public class Bishop extends Piece{
 		/*System.out.println("Illegal movie, try again");
 		System.out.println();*/
 		//System.out.println("4");
-		System.out.println(5);
+		//System.out.println(5);
 		return false;
 	}
 	public String getColor()

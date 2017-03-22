@@ -1,21 +1,44 @@
 package chess;
-
+/**
+ * This class keeps represents the location of a piece. 
+ * 
+ * @author Pranav Kanukollu, pvk9		
+ * @author Nishanth Athreya, nsa48
+ */
 public class Location {
 	private char x;
 	private int y;
+	/**
+	 * Constructor.
+	 * 
+	 * @param x is the column of the board represented as a letter.
+	 * @param y is the row of the board represented by numbers 1-8.
+	 */
 	public Location(char x, int y)
 	{
 		this.x = x;
 		this.y = y;
 	}
+	/**
+	 * This method returns the current column the piece is located in.
+	 * @return char Return type is a char.
+	 */
 	public char getX()
 	{
 		return x;
 	}
+	/**
+	 * This method returns the row the piece is located in.
+	 * @return int Return type is an int.
+	 */
 	public int getY()
 	{
 		return y;
 	}
+	/**
+	 * This method returns the numerical value of the char representing the column the piece is located in.
+	 * @return int Return type is int.
+	 */
 	public int convertX()
 	{
 		switch (x)
@@ -39,6 +62,11 @@ public class Location {
 		}
 		return 0;
 	}
+	/**
+	 * This method checks if two locations have the same values.
+	 * @param o is the Object to be compared to.
+	 * @return boolean represents whether or not the location classes are equal.
+	 */
 	public boolean equals(Object o){
 		if(!(o instanceof Location))
 			return false;

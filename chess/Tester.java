@@ -63,12 +63,24 @@ public class Tester {
 					System.out.println("Illegal move, try again");
 					System.out.println();
 				}
-				b.draw();
+				/*else{
+					if(b.check)
+						System.out.println("Check");
+					b.draw();
+				}*/
 				//System.out.println();
 				//b.draw2();
 			}
 			turn++;
 			f = two.isCheckMate(b);
+			if(flag && !f){
+				if(b.check){
+					System.out.println();
+					System.out.println("Check");
+					System.out.println();
+				}
+				b.draw();
+			}
 		}
 		else{
 			boolean flag = false;
@@ -109,20 +121,38 @@ public class Tester {
 					}
 				}
 				flag = two.move(b, current, movingto, c, false);
-				b.draw();
+				if(!flag){
+					System.out.println();
+					System.out.println("Illegal move, try again");
+					System.out.println();
+				}
+				/*else{
+					System.out.println("Check");
+					b.draw();
+				}*/
 				//System.out.println();
 			//	b.draw2();
 			}
 			turn++;
 			f = one.isCheckMate(b);
+			if(flag && !f){
+				if(b.check){
+					System.out.println();
+					System.out.println("Check");
+					System.out.println();
+				}
+				b.draw();
+			}
 		}
 		//i++;
 	}
 		if(/*one.isCheckMate(b)*/turn % 2 == 0){
 			System.out.println();
+			System.out.println("Checkmate");
 			System.out.println("White wins");
 		}else{
 			System.out.println();
+			System.out.println("Checkmate");
 			System.out.println("Black wins");
 		}
 		scan.close();
