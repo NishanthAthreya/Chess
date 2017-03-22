@@ -1,15 +1,31 @@
 package chess;
-
+/**
+ * This class defines a bishop and all of its basic moves. This class overrides the methods from the Piece 
+ * abstract class.
+ * @author Pranav Kanukollu, pvk9
+ * @author Nishanth Athreya, nsa48
+ */
 public class Bishop extends Piece{
-
 	private String color;
 	private Location location;
 	boolean check = false;
+	/**
+	 * Constructor.
+	 * 
+	 * @param location Current location of the bishop
+	 * @param color	Current color of the bishop
+	 */
 	public Bishop(Location location, String color)
 	{
 		this.location = location;
 		this.color = color;
 	}
+	/**
+	 * This method checks if the bishop can move to a new location on the board given the new location and the board.
+	 * @param newLoc This is a Location object parameter which is the new Location where the bishop is trying to move.
+	 * @param b This is a Board object parameter, which is where the piece is moving on.
+	 * @return boolean Returns true/false based on whether bishop can move to the new location or not.
+	 */
 	public boolean canMove(Location newLoc, Board b)
 	{
 		//System.out.println(b.check);
@@ -90,6 +106,14 @@ public class Bishop extends Piece{
 		}
 		return true;
 	}
+	/**
+	 * This method takes into account whether or not there is a check on a king, in which case
+	 * the bishop can't move. It takes into account various cases where it can move even if there is a check. 
+	 * It finally returns true or false based on whether it moved or not.
+	 * @param newLoc Location object parameter, which is where the bishop is trying to move to.
+	 * @param b Board object parameter, which is where the bishop is moving on.
+	 * @return boolean Returns true or false based on whether the bishop has moved or not.
+	 */
 	public boolean moveTo(Location newLoc, Board b)
 	{
 		if (b.check==false)
@@ -217,10 +241,18 @@ public class Bishop extends Piece{
 		//System.out.println(5);
 		return false;
 	}
+	/**
+	 * This method returns the color of the bishop.
+	 * @return String
+	 */
 	public String getColor()
 	{
 		return color;
 	}
+	/**
+	 * This method returns the string version of the bishop.
+	 * @return String
+	 */
 	public String toString()
 	{
 		if (color == "white")
@@ -229,10 +261,18 @@ public class Bishop extends Piece{
 		}
 		return "bB";
 	}
+	/**
+	 * This method returns the current location of the bishop.
+	 * @return Location
+	 */
 	public Location getLocation()
 	{
 		return location;
 	}
+	/**
+	 * This method sets the location of the bishop to a new given location.
+	 * @param newLoc This is what the location of the bishop will be set to.
+	 */
 	public void setLocation(Location newLoc)
 	{
 		location = newLoc;

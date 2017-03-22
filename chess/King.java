@@ -106,11 +106,15 @@ public class King extends Piece{
 			{
 				if (newLoc.getX() == 'g')
 				{
+					boolean c = true;
+					
 					if (hasMoved == true || currRank!=newRank)
 					{
 						//System.out.println("king3");
-						return false;
+						//return false;
+						c = false;//no castling
 					}
+					if(c){
 					if (pieces[7][7] == null)
 					{
 						//System.out.println("king4");
@@ -131,14 +135,18 @@ public class King extends Piece{
 					isCastling = true;
 					pieces[7][7].setLocation(new Location('f',7));
 					return true;
+					}
 				}
 				if (newLoc.getX() == 'b')
 				{
+					boolean c = true;
 					if (hasMoved == true || currRank!=newRank)
 					{
 						//System.out.println("king6");
-						return false;
+						//return false;
+						c = false;
 					}
+					if(c){
 					if (pieces[7][0] == null)
 					{
 						//System.out.println("king7");
@@ -159,6 +167,7 @@ public class King extends Piece{
 					pieces[7][0].setLocation(new Location('c',7));
 					isCastling = true;
 					return true;
+					}
 				}
 			}
 		if (b.board[newRank][newFile]!=null && b.board[newRank][newFile].getColor() == this.color)
@@ -204,6 +213,10 @@ public class King extends Piece{
 					Location opposKingsLoc = piece.getKingLocation(piece.getColor(), copy);
 					if(piece.canMove(opposKingsLoc, copy)){
 						copy = null;
+						System.out.println(piece);
+						System.out.println(piece.getLocation().getX() + " " + piece.getLocation().getY());
+						System.out.println(opposKingsLoc.getX() + " " + opposKingsLoc.getY());
+						//System.out.println("yes");
 						return false;
 					}
 				}
@@ -229,6 +242,7 @@ public class King extends Piece{
 		}*/
 		if (checkPiece!=null )
 		{
+			//System.out.println("no");
 			Location checkLoc = checkPiece.getLocation();
 			//boolean flag = false;
 			Board copy = b.boardcopy();
@@ -272,7 +286,8 @@ public class King extends Piece{
 					return true;
 			}
 		}
-		else{
+		/*else{
+			System.out.println("why");
 			Board copy = b.boardcopy();
 			copy.board[newLoc.getY()][newLoc.convertX()] = this;
 			copy.board[location.getY()][location.convertX()]=null;
@@ -288,8 +303,12 @@ public class King extends Piece{
 					}
 				}
 			}
-		}
+		}*/
 		//old
+		//System.out.println("b:");
+		//b.draw();
+		//System.out.println(this.getLocation().getX() + " " + this.getLocation().getY());
+		//System.out.println(newLoc.getX() + " " + newLoc.getY());
 		if (this.canMove(newLoc, b))
 		{
 			hasMoved = true;
@@ -298,6 +317,7 @@ public class King extends Piece{
 		}
 		//System.out.println("Illegal move, try again");
 		//System.out.println();
+		//System.out.println("ouch");
 		return false;
 	}
 	/**

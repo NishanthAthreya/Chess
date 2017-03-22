@@ -76,6 +76,10 @@ public abstract class Piece {
 				if (pieces[i][j]!=null)
 				{
 				//System.out.println("entered second for loop"+pieces[i][j].toString());
+				//System.out.println(pieces[i][j]);
+				//System.out.println(pieces[i][j].getLocation().getX() + " " + pieces[i][j].getLocation().getY());
+				//if(pieces[i][j].toString().equals("bK"))
+						//System.out.println(color.equals("white"));
 				if (color.equals("white") && pieces[i][j].toString().equals("bK"))
 				{
 					//System.out.println("entered if" + pieces[i][j].location);

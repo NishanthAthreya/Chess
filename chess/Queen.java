@@ -1,13 +1,30 @@
 package chess;
-
+/**
+ * This class defines a queen and all of its basic moves. This class overrides method from the Piece
+ * abstract class.
+ * @author Pranav Kanukollu, pvk9
+ * @author Nishanth Athreya, nsa48
+ *
+ */
 public class Queen extends Piece{
 	private String color;
 	private Location location;
 	boolean check = false;
+	/**
+	 * Constructor.
+	 * @param location This is the current location of the queen.
+	 * @param color This is the color of the queen.
+	 */
 	public Queen(Location location, String color){
 		this.location = location;
 		this.color = color;
 	}
+	/**
+	 * This method checks if the queen can move to a new location on the board given the new location and the board.
+	 * @param newLoc This is a Location object parameter which is the new Location where the queen is trying to move.
+	 * @param b This is a Board object parameter, which is where the queen is moving on.
+	 * @return boolean Returns true/false based on whether queen can move to the new location or not.
+	 */
 	@Override
 	boolean canMove(Location newLoc, Board b) {
 		
@@ -94,7 +111,14 @@ public class Queen extends Piece{
 				//System.out.println("normal");
 		return false;
 	}
-
+	/**
+	 * This method takes into account whether or not there is a check on a king, in which case
+	 * the queen can't move. It takes into account various cases where it can move even if there is a check. 
+	 * It finally returns true or false based on whether it moved or not.
+	 * @param newLoc Location object parameter, which is where the queen is trying to move to.
+	 * @param b Board object parameter, which is where the queen is moving on.
+	 * @return boolean Returns true or false based on whether the queen has moved or not.
+	 */
 	@Override
 	boolean moveTo(Location newLoc, Board b) {
 		if (b.check==false)
@@ -215,11 +239,18 @@ public class Queen extends Piece{
 		//System.out.println(5);
 		return false;
 	}
-
+	/**
+	 * This method returns the color of the queen.
+	 * @return String
+	 */
 	@Override
 	String getColor() {
 		return color;
 	}
+	/**
+	 * This method returns the string representation of the queen.
+	 * @return String
+	 */
 	public String toString()
 	{
 		if (color.equals("white"))
@@ -228,10 +259,18 @@ public class Queen extends Piece{
 		}
 		return "bQ";
 	}
+	/**
+	 * This method returns the current location of the queen.
+	 * @return Location
+	 */
 	public Location getLocation()
 	{
 		return location;
 	}
+	/**
+	 * This method sets the location of the queen to a new location.
+	 * @param newLoc This is the new location which will be set as the location of the queen.
+	 */
 	public void setLocation(Location newLoc)
 	{
 		location = newLoc;

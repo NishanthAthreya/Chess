@@ -1,10 +1,31 @@
 package chess;
-
+/**
+ * This class defines a Player object, which can move a piece from one location on the board to another.
+ * This class also has implementations for checkmate and stalemate.
+ * @author Pranav Kanukollu, pvk9
+ * @author Nishanth Athreya, nsa48
+ *
+ */
 public class Player {
 	private String color;
+	/**
+	 * Constructor.
+	 * @param color This is the color of the pieces that the Player moves.
+	 */
 	public Player(String color){
 		this.color = color;
 	}
+	/**
+	 * This method moves a piece from location to another, if it is allowed to do so. This is also where a
+	 * piece captures another piece of the opposing color, if the other piece is in the final location of the piece.
+	 * Additionally, this method defines promotion for a pawn when it reaches the other side of the board.
+	 * @param b Board object, where the pieces are being moved on.
+	 * @param init This is the initial location of the piece.
+	 * @param to This is the final location of the piece.
+	 * @param x This is a char, which is used for indicating what piece that pawn should be promoted to.
+	 * @param isCopy 
+	 * @return boolean Returns true or false based on whether the player has successfully moved the piece or not.
+	 */
 	public boolean move(Board b, Location init, Location to, char x, boolean isCopy){
 		if(b.board[init.getY()][init.convertX()] == null){
 			/*System.out.println("Illegal move, try again");
@@ -182,6 +203,11 @@ public class Player {
 		//System.out.println("random");
 		return false;
 	}
+	/**
+	 * This method indicates whether or not it is a checkmate based on whether the king has any valid moves or not.
+	 * @param b Board object, which is used to traverse through the board to see if king has any valid moves.
+	 * @return boolean Returns true/false indicating whether it is a checkmate or not.
+	 */
 	public boolean isCheckMate(Board b)
 	{
 		if (!b.check)
@@ -340,6 +366,81 @@ public class Player {
 			}
 		}
 			
+		return true;
+	}
+	/**
+	 * This method checks if a stalemate is present.
+	 * @param b is the Board.
+	 * @return boolean indicates if there is a stalemate.
+	 */
+	public boolean isStalemate(Board b){
+		if(b.check)
+			return false;
+		Piece[][] pieces = b.board; 
+		Piece myKing = null;
+		for (int i = 0; i < pieces.length; i++)
+		{
+			for (int j = 0; j<pieces[0].length;j++)
+			{
+				if (pieces[i][j] != null && this.color.equals("black"))
+				{
+				if (pieces[i][j].toString().equals("bK"))
+				{
+					myKing = pieces[i][j];
+				}
+				}
+				else if (pieces[i][j] != null && this.color.equals("white"))
+				{
+					if (pieces[i][j].toString().equals("wK"))
+					{
+						myKing = pieces[i][j];
+					}
+				}
+			}
+		}
+		for(int i = 0;i < pieces.length;i++){
+			for(int j = 0;j < pieces[i].length;j++){
+				//Location location = new Location((char)('a'+j), i);
+				Piece p = pieces[i][j];
+				if(p != null && p.getColor().equals(this.color)){
+					for(int x = 0;x < b.board.length;x++){
+						for(int y = 0;y < b.board[x].length;y++){
+							Board copy = b.boardcopy();
+							Location newLoc = new Location((char)('a'+y), x);
+							if(p.canMove(newLoc, copy) && !newLoc.equals(myKing.getLocation())){
+							if(b.board[x][y] == null || (b.board[x][y] != null && !p.getColor().equals(b.board[x][y].getColor()))){
+								Location loc = myKing.getLocation();
+								if(p.getLocation().equals(myKing.getLocation())){
+									loc = newLoc;
+								}
+								copy.board[x][y] = p;
+							copy.board[i][j] = null;
+							boolean f = true;
+							for(int k = 0;k < copy.board.length;k++){
+								for(int l = 0;l < copy.board[k].length;l++){
+									Piece enemy = copy.board[k][l];
+									if(enemy != null && !enemy.getColor().equals(this.color) && enemy.canMove(/*myKing.getLocation()*/loc, copy)){
+										f = false;
+										break;
+									}
+								}
+								if(!f)
+									break;
+							}
+							if(f){
+								//System.out.println("not good");
+								//System.out.println("copy of board:");
+								//copy.draw();
+								//System.out.println("king: " +loc.getX() + " " + loc.getY());
+								return false;
+							}
+							}
+							}
+						}
+					}
+				}
+			}
+		}
 		return true;
 	}
 }

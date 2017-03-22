@@ -111,9 +111,13 @@ public class Pawn extends Piece{
 		if(this.color.equals("black")){
 			if(this.location.getY() != 6 && diff > 1)
 				return false;
+			if(b.board[this.getLocation().getY() - 1][this.getLocation().convertX()] != null)
+				return false;
 		}
 		else if(this.color.equals("white")){
 			if(this.location.getY() != 1 && diff > 1)
+				return false;
+			if(b.board[this.getLocation().getY() + 1][this.getLocation().convertX()] != null)
 				return false;
 		}
 		return true;

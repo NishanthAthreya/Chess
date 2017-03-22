@@ -122,6 +122,9 @@ public class Rook extends Piece{
 				Piece piece = copy.board[r][c];
 				if(piece != null && !(piece.getColor().equals(this.color))){
 					Location opposKingsLoc = piece.getKingLocation(piece.getColor(), copy);
+					//System.out.println("copy 2:");
+					//copy.draw();
+					//System.out.println(opposKingsLoc);
 					if(piece.canMove(opposKingsLoc, copy)){
 						copy = null;
 						return false;

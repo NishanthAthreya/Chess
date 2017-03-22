@@ -1,9 +1,18 @@
 package chess;
 
 import java.util.Scanner;
-
+/**
+ * This is the main class for the chess application.
+ * @author Pranav Kanukollu, pvk9
+ * @author Nishanth Athreya, nsa48
+ *
+ */
 public class Tester {
-
+	/**
+	 * This is the main method for the chess application which creates a board object, and two player objects. 
+	 * The game continues until one of the players resigns, one of the players asks for a draw, or if there is a checkmate or stalemate.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Board b = new Board();
 		b.draw();
@@ -81,6 +90,14 @@ public class Tester {
 				}
 				b.draw();
 			}
+			if(!f){
+				if(one.isStalemate(b) || two.isStalemate(b)){
+					System.out.println();
+					System.out.println("Stalemate");
+					System.out.println();
+					System.exit(0);
+				}
+			}
 		}
 		else{
 			boolean flag = false;
@@ -142,6 +159,14 @@ public class Tester {
 					System.out.println();
 				}
 				b.draw();
+			}
+			if(!f){
+				if(two.isStalemate(b) || one.isStalemate(b)){
+					System.out.println();
+					System.out.println("Stalemate");
+					System.out.println();
+					System.exit(0);
+				}
 			}
 		}
 		//i++;
