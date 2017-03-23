@@ -221,7 +221,7 @@ public class Bishop extends Piece{
 		if (this.canMove(newLoc, b))
 		{
 			//System.out.println("entered into canmove");
-			location = newLoc;
+			//location = newLoc;
 			Location opposKingsLoc = this.getKingLocation(this.color, b);
 			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
 			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());

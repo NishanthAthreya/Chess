@@ -197,9 +197,9 @@ public class King extends Piece{
 					Location opposKingsLoc = piece.getKingLocation(piece.getColor(), copy);
 					if(piece.canMove(opposKingsLoc, copy)){
 						copy = null;
-						System.out.println(piece);
-						System.out.println(piece.getLocation().getX() + " " + piece.getLocation().getY());
-						System.out.println(opposKingsLoc.getX() + " " + opposKingsLoc.getY());
+						//System.out.println(piece);
+						//System.out.println(piece.getLocation().getX() + " " + piece.getLocation().getY());
+						//System.out.println(opposKingsLoc.getX() + " " + opposKingsLoc.getY());
 						//System.out.println("yes");
 						return false;
 					}

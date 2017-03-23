@@ -221,7 +221,7 @@ public class Queen extends Piece{
 		}
 		if (this.canMove(newLoc, b))
 		{
-			this.location = newLoc;
+			//this.location = newLoc;
 			Location opposKingsLoc = this.getKingLocation(this.color, b);
 			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
 			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());

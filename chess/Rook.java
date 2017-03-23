@@ -201,7 +201,7 @@ public class Rook extends Piece{
 		{
 			//System.out.println("this is a rook");
 			//hasMoved = true;
-			location = newLoc;
+			//location = newLoc;
 			Location opposKingsLoc = this.getKingLocation(this.color, b);
 			//System.out.println("Bishop's loc: " + this.getLocation().getX()+ " " + this.getLocation().getY());
 			//System.out.println("King's Loc: " + opposKingsLoc.getX() + " " + opposKingsLoc.getY());
