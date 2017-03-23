@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Nishanth Athreya, nsa48
  *
  */
-public class Tester {
+public class Chess {
 	/**
 	 * This is the main method for the chess application which creates a board object, and two player objects. 
 	 * The game continues until one of the players resigns, one of the players asks for a draw, or if there is a checkmate or stalemate.
@@ -72,7 +72,7 @@ public class Tester {
 				if(!flag){
 					System.out.println();
 					System.out.println("Illegal move, try again");
-					System.out.println();
+					//System.out.println();
 				}
 			}
 			turn++;
@@ -141,7 +141,7 @@ public class Tester {
 				if(!flag){
 					System.out.println();
 					System.out.println("Illegal move, try again");
-					System.out.println();
+					//System.out.println();
 				}
 			}
 			turn++;

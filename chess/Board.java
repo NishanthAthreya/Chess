@@ -7,15 +7,17 @@ package chess;
  * @author Pranav Kanukollu, pvk9		
  * @author Nishanth Athreya, nsa48
  */
-/**
- * Constructor.
- */
 public class Board {
 	Piece[][] board; 
 	Location BlackKingsLocation;
 	boolean check= false;
+	Piece prev;
+	/**
+	 * Constructor.
+	 */
 	public Board(){
 		board = new Piece[8][8];
+		prev = null;
 		init();
 	}
 	/**
@@ -75,6 +77,7 @@ public class Board {
 	 */
 	public Board boardcopy(){
 		Board copy = new Board();
+		copy.prev = this.prev;
 		copy.check = this.check;
 		for(int i = 0;i < board.length;i++){
 			for(int j = 0;j < board[i].length;j++){

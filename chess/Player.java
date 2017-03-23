@@ -28,8 +28,6 @@ public class Player {
 	 */
 	public boolean move(Board b, Location init, Location to, char x, boolean isCopy){
 		if(b.board[init.getY()][init.convertX()] == null){
-			/*System.out.println("Illegal move, try again");
-			System.out.println();*/
 			return false;
 		}
 		boolean canMove = false;
@@ -48,24 +46,14 @@ public class Player {
 					Pawn pawn = (Pawn)b.board[to.getY()][to.convertX()];
 					pawn.numMoves = pawn.numMoves + 1;
 				}
-				//
 				Location opposKingsLoc = curr.getKingLocation(this.color, b);
-				/*System.out.println(curr);
-				System.out.println(curr.getLocation().getX() + " " + curr.getLocation().getY());
-				System.out.println(opposKingsLoc.getX() + " " + opposKingsLoc.getY());*/
 				if (curr.canMove(opposKingsLoc, b))
 				{
 					curr.check = true;
 					b.check = true;
-					/*if(!isCopy){
-						System.out.println();
-						System.out.println("Check");
-						System.out.println();
-					}*/
 				}
 				else
 				{
-					//System.out.println("yes");
 					curr.check = false;
 					b.check = false;
 					Piece checkPiece = curr.getCheckPiece(b);
@@ -73,12 +61,7 @@ public class Player {
 						checkPiece.check = false;
 					}
 				}
-				//curr.moveTo(to);
 				if((to.getY() == 7 || to.getY() == 0) && curr instanceof Pawn){
-					/*System.out.println("Please enter what piece you want your pawn to"
-							+ "transform into");
-					String x = keyboard.nextLine().toUpperCase();
-					String color;*/
 					switch(x){
 					case 'B':
 						color = b.board[to.getY()][to.convertX()].getColor();
@@ -98,19 +81,10 @@ public class Player {
 						break;
 					}
 				}
+				b.prev = curr;
 				return true;
 				}	
 			else{
-				/*if(canMove){
-					System.out.println("Illegal move, try again");
-					System.out.println();
-				}*/
-				/*System.out.println();
-				System.out.println("Illegal move, try again");
-				System.out.println();*/
-				/*System.out.println("player1");
-				System.out.println("canMove: " + canMove);
-				System.out.println("other: " + p.getColor().equals(color));*/
 				return false;
 			}
 		}
@@ -144,23 +118,13 @@ public class Player {
 			Location newLoc = new Location(to.getX(),to.getY());		//changing location of piece
 			curr.setLocation(newLoc);
 			b.board[init.getY()][init.convertX()]=null;
-			//
 			Location opposKingsLoc = curr.getKingLocation(this.color, b);
-			/*System.out.println(curr);
-			System.out.println(curr.getLocation().getX() + " " + curr.getLocation().getY());
-			System.out.println(opposKingsLoc.getX() + " " + opposKingsLoc.getY());*/
 			if (curr.canMove(opposKingsLoc, b))
 			{
 				curr.check = true;
 				b.check = true;
-				/*if(!isCopy){
-					System.out.println();
-					System.out.println("Check");
-					System.out.println();
-				}*/
 			}
 			else {
-				//System.out.println("yes");
 				curr.check = false;
 				b.check = false;
 				Piece checkPiece = curr.getCheckPiece(b);
@@ -168,14 +132,7 @@ public class Player {
 					checkPiece.check = false;
 				}
 			}
-		//curr.moveTo(to);
-			//System.out.println(curr.toString());
 			if((to.getY() == 7 || to.getY() == 0) && curr instanceof Pawn){
-				/*System.out.println("Please enter what piece you want your pawn to"
-						+ "transform into");
-				String x = keyboard.nextLine().toUpperCase();
-				String color;*/
-				//System.out.println("entered instanceof");
 				switch(x){
 				case 'B':
 					color = b.board[to.getY()][to.convertX()].getColor();
@@ -195,12 +152,9 @@ public class Player {
 					break;
 				}
 			}
+			b.prev = curr;
 			return true;
 		}
-		/*System.out.println();
-		System.out.println("Illegal move, try again");
-		System.out.println();*/
-		//System.out.println("random");
 		return false;
 	}
 	/**
@@ -273,45 +227,21 @@ public class Player {
 							}
 							Board copy = b.boardcopy();
 							Location location = new Location((char)('a'+j),i);
-							/*System.out.println(p);
-							System.out.println(location.getX() + " " + location.getY());
-							System.out.println(p.getLocation().getX() + " " + p.getLocation().getY());*/
 							Location newLoc = new Location((char)('a'+y),x);
-							//System.out.println(newLoc.getX() + " " + newLoc.getY());
 							boolean bl = this.move(copy, location, newLoc, 'Q', true); 
-							//System.out.println(bl);
 							if(bl){
 								Piece checkPiece = p.getCheckPiece(copy);
 								if (checkPiece==null)
 								{
-									//System.out.println("here 1");
 									b.board[i][j].setLocation(location);
 									cp.check = true;
 									b.check = true;
 									return false;
-								}/*else{
-									System.out.println(checkPiece);
-								}*/
+								}
 							}
-							//System.out.println("left");
 							cp.check = true;
 							b.check = true;
 							b.board[i][j].setLocation(location);
-							//copy.board[newLoc.getY()][newLoc.convertX()] = p;
-							//copy.board[location.getY()][location.convertX()]=null;
-							/*for(int r = 0;r < copy.board.length;r++){
-								for(int c = 0; c < copy.board[i].length;c++){
-									if(copy.board[r][c] != null && copy.board[r][c].getColor().equals(this.color)){
-										Piece k = oppos
-									}
-								}
-							}*/
-							/*Piece checkPiece = p.getCheckPiece(copy);
-							if (checkPiece==null)
-							{
-								System.out.println("here 1");
-								return false;
-							}*/
 						}
 					}
 				}
@@ -341,28 +271,8 @@ public class Player {
 					}
 					if(f)
 						return false;
-					/*System.out.println("here in if 2");
-					if(!copy.check)
-					{
-						myKing.setLocation(mykingloc);
-						//b.check = true;
-						return false;
-					} */
-					/*for (int x = 0; x< b.board.length; x++)
-					{
-						for (int y = 0; y<b.board[0].length;y++)
-						{
-							if(b.board[x][y] != null && !(b.board[x][y].canMove(loc, b)) && !(b.board[x][y].getColor().equals(king.getColor())))	//have to check that it's opposite color!!
-							{
-								System.out.println("here 2");
-								return false;			//not a checkmate, king can move there
-							}
-						}
-					}*/
 				}
-					//b.check = true;
 					myKing.setLocation(mykingloc);
-				//king.setLocation(kingsLoc);
 			}
 		}
 			
@@ -428,10 +338,6 @@ public class Player {
 									break;
 							}
 							if(f){
-								//System.out.println("not good");
-								//System.out.println("copy of board:");
-								//copy.draw();
-								//System.out.println("king: " +loc.getX() + " " + loc.getY());
 								return false;
 							}
 							}
